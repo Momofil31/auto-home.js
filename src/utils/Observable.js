@@ -99,7 +99,7 @@ class Observable {
      * @param {*} observerKey
      * @param {observer} observer function(value, key, observable)
      */
-    unobserve(key, observer, observerKey) {
+    unobserve(key, observer, observerKey = null) {
         if (key in this.#observers) {
             if (observerKey == null) {
                 delete this.#observers[key][observer];
@@ -112,6 +112,7 @@ class Observable {
     /**
      *
      * @param {*} key
+     * @param {*} observerKey
      * @returns {Promise} Promise that resolves when observed value changes
      */
     async notifyChange(key, observerKey = null) {
