@@ -29,3 +29,6 @@ From root directory of this repository run:
 ```
 node ./src/autohouse/scenario1.js
 ```
+
+## Logs
+Logs of the scenario running can be found in `scenario_logs` directory.
