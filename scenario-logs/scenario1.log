@@ -1,0 +1,160 @@
+house agent              Trying to use intention AlarmIntention to achieve goal SetupAlarm#0[object Object]
+house agent              Trying to use intention SensePeoplePositionIntention to achieve goal SensePeoplePositionGoal#1[object Object]
+house agent              Trying to use intention LightsFollowPeopleIntention to achieve goal LightsFollowPeopleGoal#2[object Object]
+house agent              Trying to use intention LightsFollowShuttersIntention to achieve goal LightsFollowShuttersGoal#3[object Object]
+security agent           Trying to use intention ManageShuttersIntention to achieve goal ManageShuttersGoal#4[object Object]
+0:06:15 house agent>AlarmIntention#0     ALARM, it's 06:15
+0:06:30 Bob      moved from living_room to kitchen
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to kitchen
+kitchen Light switched on.
+house agent              Beliefset: not person_in_room Bob living_room
+house agent              Beliefset: person_in_room Bob kitchen
+0:06:35 Bob has eaten breakfast and put dirty dishes in the dishwasher.
+0:07:00 kitchen shutter moved up.
+living_room shutter moved up.
+bathroom_0 shutter moved up.
+kitchen Light switched off.
+0:08:00 Bob      moved from kitchen to living_room
+Bob      moved from living_room to out
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to out
+kitchen shutter moved down.
+living_room shutter moved down.
+bathroom_0 shutter moved down.
+house agent              Beliefset: person_in_room Bob out
+0:18:00 Bob      moved from out to living_room
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to living_room
+living_room Light switched on.
+kitchen shutter moved up.
+living_room shutter moved up.
+bathroom_0 shutter moved up.
+house agent              Beliefset: not person_in_room Bob out
+house agent              Beliefset: person_in_room Bob living_room
+living_room Light switched off.
+0:18:10 Bob      moved from living_room to hallway
+Bob      moved from hallway to bathroom_0
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to bathroom_0
+house agent              Beliefset: not person_in_room Bob hallway
+house agent              Beliefset: person_in_room Bob bathroom_0
+0:18:30 Bob      moved from bathroom_0 to hallway
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to hallway
+hallway Light switched on.
+house agent              Beliefset: not person_in_room Bob bathroom_0
+house agent              Beliefset: person_in_room Bob hallway
+0:18:35 Bob      moved from hallway to garage
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to garage
+garage Light switched on.
+hallway Light switched off.
+house agent              Beliefset: not person_in_room Bob hallway
+house agent              Beliefset: person_in_room Bob garage
+0:18:45 Bob      moved from garage to hallway
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to hallway
+hallway Light switched on.
+garage Light switched off.
+house agent              Beliefset: not person_in_room Bob garage
+house agent              Beliefset: person_in_room Bob hallway
+0:19:00 Bob      moved from hallway to living_room
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to living_room
+living_room Light switched on.
+hallway Light switched off.
+house agent              Beliefset: not person_in_room Bob hallway
+0:20:00 Bob      moved from living_room to kitchen
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to kitchen
+kitchen Light switched on.
+living_room Light switched off.
+house agent              Beliefset: not person_in_room Bob living_room
+0:21:00 Bob      moved from kitchen to living_room
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to living_room
+living_room Light switched on.
+kitchen Light switched off.
+house agent              Beliefset: not person_in_room Bob kitchen
+house agent              Beliefset: person_in_room Bob living_room
+0:22:00 kitchen shutter moved down.
+living_room shutter moved down.
+bathroom_0 shutter moved down.
+1:06:15 house agent>AlarmIntention#0     ALARM, it's 06:15
+1:06:30 Bob      moved from living_room to kitchen
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to kitchen
+kitchen Light switched on.
+living_room Light switched off.
+house agent              Beliefset: not person_in_room Bob living_room
+house agent              Beliefset: person_in_room Bob kitchen
+1:06:35 Bob has eaten breakfast and put dirty dishes in the dishwasher.
+1:07:00 kitchen shutter moved up.
+living_room shutter moved up.
+bathroom_0 shutter moved up.
+kitchen Light switched off.
+1:08:00 Bob      moved from kitchen to living_room
+Bob      moved from living_room to out
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to out
+kitchen shutter moved down.
+living_room shutter moved down.
+bathroom_0 shutter moved down.
+house agent              Beliefset: person_in_room Bob out
+1:18:00 Bob      moved from out to living_room
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to living_room
+living_room Light switched on.
+kitchen shutter moved up.
+living_room shutter moved up.
+bathroom_0 shutter moved up.
+house agent              Beliefset: not person_in_room Bob out
+house agent              Beliefset: person_in_room Bob living_room
+living_room Light switched off.
+1:18:10 Bob      moved from living_room to hallway
+Bob      moved from hallway to bathroom_0
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to bathroom_0
+house agent              Beliefset: person_in_room Bob bathroom_0
+1:18:30 Bob      moved from bathroom_0 to hallway
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to hallway
+hallway Light switched on.
+house agent              Beliefset: not person_in_room Bob bathroom_0
+house agent              Beliefset: person_in_room Bob hallway
+1:18:35 Bob      moved from hallway to garage
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to garage
+garage Light switched on.
+hallway Light switched off.
+house agent              Beliefset: not person_in_room Bob hallway
+house agent              Beliefset: person_in_room Bob garage
+1:18:45 Bob      moved from garage to hallway
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to hallway
+hallway Light switched on.
+garage Light switched off.
+house agent              Beliefset: not person_in_room Bob garage
+house agent              Beliefset: person_in_room Bob hallway
+1:19:00 Bob      moved from hallway to living_room
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to living_room
+living_room Light switched on.
+hallway Light switched off.
+house agent              Beliefset: not person_in_room Bob hallway
+1:20:00 Bob      moved from living_room to kitchen
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to kitchen
+kitchen Light switched on.
+living_room Light switched off.
+house agent              Beliefset: not person_in_room Bob living_room
+1:21:00 Bob      moved from kitchen to living_room
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to living_room
+living_room Light switched on.
+kitchen Light switched off.
+house agent              Beliefset: not person_in_room Bob kitchen
+house agent              Beliefset: person_in_room Bob living_room
+1:22:00 kitchen shutter moved down.
+living_room shutter moved down.
+bathroom_0 shutter moved down.
+2:06:15 house agent>AlarmIntention#0     ALARM, it's 06:15
+2:06:30 Bob      moved from living_room to kitchen
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to kitchen
+kitchen Light switched on.
+living_room Light switched off.
+house agent              Beliefset: not person_in_room Bob living_room
+house agent              Beliefset: person_in_room Bob kitchen
+2:06:35 Bob has eaten breakfast and put dirty dishes in the dishwasher.
+2:07:00 kitchen shutter moved up.
+living_room shutter moved up.
+bathroom_0 shutter moved up.
+kitchen Light switched off.
+2:08:00 Bob      moved from kitchen to living_room
+Bob      moved from living_room to out
+house agent>SensePeoplePositionIntention#1       sense: Bob moved to out
+kitchen shutter moved down.
+living_room shutter moved down.
+bathroom_0 shutter moved down.
+house agent              Beliefset: person_in_room Bob out
