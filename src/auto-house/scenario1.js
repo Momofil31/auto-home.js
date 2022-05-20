@@ -13,6 +13,7 @@ const {
     SensePeoplePositionGoal,
 } = require("./sensors/PeoplePositionSensor");
 const { ManageShuttersGoal, ManageShuttersIntention } = require("./devices/Shutter");
+const { StartDishwasherGoal, StartDishwasherIntention } = require("./devices/Dishwasher");
 
 // House, which includes rooms and devices
 let house = new House();
@@ -25,6 +26,7 @@ houseAgent.intentions.push(AlarmIntention);
 houseAgent.intentions.push(SensePeoplePositionIntention);
 houseAgent.intentions.push(LightsFollowPeopleIntention);
 houseAgent.intentions.push(LightsFollowShuttersIntention);
+houseAgent.intentions.push(StartDishwasherIntention);
 
 // add goals
 houseAgent.postSubGoal(new SetupAlarm({ hh: 6, mm: 15 }));
@@ -43,6 +45,7 @@ houseAgent.postSubGoal(
         shutters: house.devices.shutters,
     }),
 );
+houseAgent.postSubGoal(new StartDishwasherGoal({ dishwasher: house.devices.dishwasher }));
 
 let securityAgent = new Agent("security agent");
 // add intentions
