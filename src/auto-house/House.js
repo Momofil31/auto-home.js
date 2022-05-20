@@ -4,6 +4,7 @@ const { Light } = require("./devices/Light");
 const { Shutter } = require("./devices/Shutter");
 const CoffeMachine = require("./devices/CoffeMachine");
 const GarageDoor = require("./devices/GarageDoor");
+const { Dishwasher } = require("./devices/Dishwasher");
 
 class House {
     constructor() {
@@ -18,7 +19,9 @@ class House {
             hallway: { name: "hallway", doors_to: ["bathroom_0", "living_room", "garage"] },
             out: { name: "out", doors_to: ["living_room"] },
         };
-        this.people = { bob: new Person(this, "Bob", this.rooms.living_room.name) };
+        this.people = {
+            bob: new Person(this, "Bob", this.rooms.living_room.name),
+        };
         this.devices = {
             shutters: {
                 kitchen: new Shutter(this, "kitchen"),
@@ -33,6 +36,7 @@ class House {
                 hallway: new Light(this, "hallway"),
             },
             coffee_machine: new CoffeMachine(this, "coffee_machine"),
+            dishwasher: new Dishwasher(this, "dishwasher"),
             garage_door: new GarageDoor(this, "garage"),
         };
         this.utilities = {

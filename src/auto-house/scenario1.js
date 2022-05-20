@@ -1,6 +1,7 @@
 const House = require("./House");
 const Agent = require("../bdi/Agent");
 const Clock = require("../utils/Clock");
+const Person = require("./Person");
 const { AlarmIntention, SetupAlarm } = require("./devices/Alarm.js");
 const {
     LightsFollowPeopleIntention,
@@ -14,6 +15,7 @@ const {
 } = require("./sensors/PeoplePositionSensor");
 const { ManageShuttersGoal, ManageShuttersIntention } = require("./devices/Shutter");
 const { StartDishwasherGoal, StartDishwasherIntention } = require("./devices/Dishwasher");
+const { SecurityAlarmIntention, SecurityAlarmGoal } = require("./Security");
 
 // House, which includes rooms and devices
 let house = new House();
@@ -50,6 +52,7 @@ houseAgent.postSubGoal(new StartDishwasherGoal({ dishwasher: house.devices.dishw
 let securityAgent = new Agent("security agent");
 // add intentions
 securityAgent.intentions.push(ManageShuttersIntention);
+securityAgent.intentions.push(SecurityAlarmIntention);
 
 // add goals
 securityAgent.postSubGoal(
@@ -60,6 +63,11 @@ securityAgent.postSubGoal(
     }),
 );
 
+let burglar = new Person(house, "burglar", house.rooms.out.name);
+securityAgent.postSubGoal(
+    new SecurityAlarmGoal({ people: { ...house.people, burglar }, house: house }),
+);
+
 // Simulated Daily/Weekly schedule
 Clock.global.observe("mm", () => {
     var time = Clock.global;
@@ -68,6 +76,8 @@ Clock.global.observe("mm", () => {
     if (time.hh == 6 && time.mm == 35) house.people.bob.eatBreakfast();
     if (time.hh == 8 && time.mm == 0) house.people.bob.moveTo("living_room");
     if (time.hh == 8 && time.mm == 0) house.people.bob.moveTo("out");
+    if (time.hh == 12 && time.mm == 0) burglar.moveTo("living_room");
+    if (time.hh == 12 && time.mm == 5) burglar.moveTo("out");
     if (time.hh == 18 && time.mm == 0) house.people.bob.moveTo("living_room");
     if (time.hh == 18 && time.mm == 10) house.people.bob.moveTo("hallway");
     if (time.hh == 18 && time.mm == 10) house.people.bob.moveTo("bathroom_0");

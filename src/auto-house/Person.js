@@ -1,10 +1,12 @@
 const Observable = require("../utils/Observable");
+const { v4: uuidv4 } = require("uuid");
 
 class Person extends Observable {
     constructor(house, name, room) {
         super();
         this.house = house; // reference to the house
         this.name = name; // non-observable
+        this.uuid = uuidv4();
         this.set("in_room", room); // observable
         this.previous_room = room;
         // this.observe( 'in_room', v => console.log(this.name, 'moved to', v) )    // observe
@@ -29,7 +31,7 @@ class Person extends Observable {
             console.log(`${this.name} cannot have breakfast. Not in the kitchen.`);
             return false;
         }
-        // this.house.devices.dishwasher.loadDishes(1);
+        this.house.devices.dishwasher.loadDishes();
         console.log(`${this.name} has eaten breakfast and put dirty dishes in the dishwasher.`);
         return true;
     }
