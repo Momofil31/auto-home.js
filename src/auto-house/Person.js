@@ -34,11 +34,11 @@ class Person extends Observable {
     }
     eatBreakfast() {
         if (this.in_room != "kitchen") {
-            this.log(`cannot have breakfast. Not in the kitchen.`);
+            this.log("cannot have breakfast. Not in the kitchen.");
             return false;
         }
         this.house.devices.dishwasher.loadDishes();
-        this.log(`has eaten breakfast and put dirty dishes in the dishwasher.`);
+        this.log("has eaten breakfast and put dirty dishes in the dishwasher.");
         return true;
     }
 }
