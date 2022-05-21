@@ -14,7 +14,7 @@ class SimpleOnOffDevice extends Observable {
             return false;
         }
         this.status = "on";
-        this.house.utilities.electricity.consumption += this.POWER;
+        this.house.utilities.electricity.consumption += this.constructor.POWER;
         console.log(`${this.name} ${this.constructor.name} switched on.`);
         return true;
     }
@@ -24,7 +24,7 @@ class SimpleOnOffDevice extends Observable {
             return false;
         }
         this.status = "off";
-        this.house.utilities.electricity.consumption -= this.POWER;
+        this.house.utilities.electricity.consumption -= this.constructor.POWER;
         console.log(`${this.name} ${this.constructor.name} switched off.`);
         return true;
     }
