@@ -13,7 +13,7 @@ class GarageDoor extends SimpleOnOffDevice {
             console.log(`${this.name} opened.`);
             return;
         }
-        console.log(`${this.name} shutter is already open.`);
+        console.error(`${this.name} shutter is already open.`);
     }
     close() {
         if (this.status != "closed") {
@@ -21,7 +21,7 @@ class GarageDoor extends SimpleOnOffDevice {
             console.log(`${this.name} shutter closed.`);
             return;
         }
-        console.log(`${this.name} shutter is already closed.`);
+        console.error(`${this.name} shutter is already closed.`);
     }
 }
 

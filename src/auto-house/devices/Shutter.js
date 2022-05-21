@@ -2,35 +2,54 @@ const Goal = require("../../bdi/Goal");
 const Intention = require("../../bdi/Intention");
 const Clock = require("../../utils/Clock");
 const Observable = require("../../utils/Observable");
+const chalk = require("chalk");
+const { deviceColors: colors } = require("../../utils/chalkColors");
+
+let nextId = 0;
 
 class Shutter extends Observable {
     constructor(house, name) {
         super();
         this.house = house; // reference to the house
         this.name = name; // non-observable
+        this.id = global.deviceNextId++;
         this.set("status", "down"); // observable
     }
+
+    headerError(header = "", ...args) {
+        process.stderr.cursorTo(0);
+        header = "\t\t" + header + " ".repeat(Math.max(50 - header.length, 0));
+        console.error(chalk.bold.italic[colors[this.id % colors.length]](header, ...args));
+    }
+
+    error(...args) {
+        this.headerError(this.name + " " + this.constructor.name, ...args);
+    }
+
+    headerLog(header = "", ...args) {
+        process.stdout.cursorTo(0);
+        header = "\t\t" + header + " ".repeat(Math.max(50 - header.length, 0));
+        console.log(chalk[colors[this.id % colors.length]](header, ...args));
+    }
+
     log(...args) {
-        process.stdout.cursorTo(0);
-        process.stdout.write("\t\t" + this.name);
-        process.stdout.cursorTo(0);
-        console.log("\t\t\t\t\t", ...args);
+        this.headerLog(this.name + " " + this.constructor.name, ...args);
     }
     moveUp() {
         if (this.status != "up") {
             this.status = "up";
-            this.log(`${this.constructor.name} moved up.`);
+            this.log("moved up.");
             return;
         }
-        this.log(`${this.constructor.name} is already up.`);
+        this.error("is already up.");
     }
     moveDown() {
         if (this.status != "down") {
             this.status = "down";
-            this.log(`${this.constructor.name} moved down.`);
+            this.log("moved down.");
             return;
         }
-        this.log(`${this.constructor.name} is already down.`);
+        this.error("is already down.");
     }
 }
 
@@ -56,7 +75,11 @@ class ManageShuttersIntention extends Intention {
                                 s.moveDown();
                             }
                         }
-                    } else if (prev_room == "out" && Clock.global.hh <= 22 && Clock.global.hh >= 7) {
+                    } else if (
+                        prev_room == "out" &&
+                        Clock.global.hh <= 22 &&
+                        Clock.global.hh >= 7
+                    ) {
                         for (let s of Object.values(shutters)) {
                             if (s.status == "down") {
                                 s.moveUp();

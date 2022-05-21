@@ -1,31 +1,16 @@
 const Beliefset = require("./Beliefset");
 const Intention = require("./Intention");
 const chalk = require("chalk");
+const { agentColors: colors } = require("../utils/chalkColors");
 
 var nextId = 0;
-const colors = [
-    "red",
-    "blue",
-    "green",
-    "yellow",
-    "magenta",
-    "cyan",
-    "redBright",
-    "greenBright",
-    "yellowBright",
-    "blueBright",
-    "magentaBright",
-    "cyanBright",
-    "whiteBright",
-];
-
 /**
  * @class Agent
  */
 class Agent {
     constructor(name) {
         this.name = name;
-        this.id = nextId++;
+        this.id = nextId++ % colors.length;
 
         /** @type {Beliefset} beliefs */
         this.beliefs = new Beliefset();

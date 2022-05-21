@@ -1,46 +1,60 @@
 const Goal = require("../../bdi/Goal");
 const Intention = require("../../bdi/Intention");
 const Observable = require("../../utils/Observable");
+const chalk = require("chalk");
+const { deviceColors: colors } = require("../../utils/chalkColors");
 
+let nextId = 0;
 class Fridge extends Observable {
     constructor(house, name) {
         super();
         this.house = house;
         this.name = name;
+        this.id = global.deviceNextId++;
         this.set("status", "full"); // empty, half of full
     }
+    headerError(header = "", ...args) {
+        process.stderr.cursorTo(0);
+        header = "\t\t" + header + " ".repeat(Math.max(50 - header.length, 0));
+        console.error(chalk.bold.italic[colors[this.id % colors.length]](header, ...args));
+    }
+    error(...args) {
+        this.headerError(this.name + " " + this.constructor.name, ...args);
+    }
+    headerLog(header = "", ...args) {
+        process.stdout.cursorTo(0);
+        header = "\t\t" + header + " ".repeat(Math.max(50 - header.length, 0));
+        console.log(chalk[colors[this.id % colors.length]](header, ...args));
+    }
     log(...args) {
-        process.stdout.cursorTo(0);
-        process.stdout.write("\t\t" + this.name);
-        process.stdout.cursorTo(0);
-        console.log("\t\t\t\t\t", ...args);
+        this.headerLog(this.name + " " + this.constructor.name, ...args);
     }
     takeFood() {
         if (this.status == "empty") {
-            this.log(`${this.constructor.name} is empty, cannot take any food.`);
+            this.error("is empty, cannot take any food.");
             return false;
         }
         if (this.status == "full") {
             this.status = "half";
-            this.log(`${this.constructor.name} is now half full.`);
+            this.log("is now half full.");
             return;
         }
         this.status = "half";
-        this.log(`${this.constructor.name} is now empty.`);
+        this.log("is now empty.");
         return;
     }
     refillFood() {
         if (this.status == "full") {
-            this.log(`${this.constructor.name} is full, cannot load more food.`);
+            this.error("is full, cannot load more food.");
             return;
         }
         if (this.status == "empty") {
             this.status = "half";
-            this.log(`${this.constructor.name} is now half full.`);
+            this.log("is now half full.");
             return;
         }
         this.status = "full";
-        this.log(`${this.constructor.name} is now full.`);
+        this.log("is now full.");
         return;
     }
 }

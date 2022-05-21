@@ -1,22 +1,29 @@
 const Observable = require("../utils/Observable");
 const { v4: uuidv4 } = require("uuid");
-
+const chalk = require("chalk");
+const { personColors: colors } = require("../utils/chalkColors");
+let nextId = 0;
 class Person extends Observable {
     constructor(house, name, room) {
         super();
         this.house = house; // reference to the house
         this.name = name; // non-observable
+        this.id = nextId++ % colors.length;
         this.uuid = uuidv4();
         this.set("in_room", room); // observable
         this.previous_room = room;
         // this.observe( 'in_room', v => console.log(this.name, 'moved to', v) )    // observe
     }
-    log(...args) {
+    headerLog(header = "", ...args) {
         process.stdout.cursorTo(0);
-        process.stdout.write("\t\t" + this.name);
-        process.stdout.cursorTo(0);
-        console.log("\t\t\t\t\t", ...args);
+        header = "\t\t" + header + " ".repeat(Math.max(50 - header.length, 0));
+        console.log(chalk[colors[this.id % colors.length]](header, ...args));
     }
+
+    log(...args) {
+        this.headerLog(this.name, ...args);
+    }
+
     moveTo(to) {
         if (this.in_room == to) {
             this.log(`stays in ${this.in_room}`);

@@ -18,6 +18,7 @@ const { StartDishwasherGoal, StartDishwasherIntention } = require("./devices/Dis
 const { SecurityAlarmIntention, SecurityAlarmGoal } = require("./Security");
 const { notifyFoodShortageGoal, notifyFoodShortageIntention } = require("./devices/Fridge");
 
+global.deviceNextId = 0;
 // House, which includes rooms and devices
 let house = new House();
 

@@ -1,8 +1,10 @@
-const Agent = require("../../bdi/Agent");
 const Intention = require("../../bdi/Intention");
 const Observable = require("../../utils/Observable");
 const Clock = require("../../utils/Clock");
 const Goal = require("../../bdi/Goal");
+const chalk = require("chalk");
+const { deviceColors: colors } = require("../../utils/chalkColors");
+
 class Dishwasher extends Observable {
     static POWER = 2000; // Watts
     static WASHING_DURATION = 2; // hours
@@ -10,26 +12,37 @@ class Dishwasher extends Observable {
         super();
         this.house = house;
         this.name = name;
+        this.id = global.deviceNextId++;
         this.set("load", "empty"); // empty, half of full
         this.set("status", "idle"); // idle or washing
     }
+    headerLog(header = "", ...args) {
+        process.stdout.cursorTo(0);
+        header = "\t\t" + header + " ".repeat(Math.max(50 - header.length, 0));
+        console.log(chalk[colors[this.id % colors.length]](header, ...args));
+    }
     log(...args) {
-        process.stdout.cursorTo(0);
-        process.stdout.write("\t\t" + this.name);
-        process.stdout.cursorTo(0);
-        console.log("\t\t\t\t\t", ...args);
+        this.headerLog(this.name + " " + this.constructor.name, ...args);
+    }
+    headerError(header = "", ...args) {
+        process.stderr.cursorTo(0);
+        header = "\t\t" + header + " ".repeat(Math.max(50 - header.length, 0));
+        console.error(chalk.bold.italic[colors[this.id % colors.length]](header, ...args));
+    }
+    error(...args) {
+        this.headerError(this.name + " " + this.constructor.name, ...args);
     }
     start() {
         if (this.load == "empty") {
-            this.log(`${this.constructor.name} is empty, cannot start washing.`);
+            this.error("is empty, cannot start washing.");
             return false;
         }
         if (this.status == "washing") {
-            this.log(`${this.constructor.name} is already washing`);
+            this.error("is already washing");
             return false;
         }
         let startTime = { hh: Clock.global.hh, mm: Clock.global.mm };
-        this.log(`${this.constructor.name} started washing.`);
+        this.log("started washing.");
         this.status = "washing";
         this.house.utilities.electricity.consumption += this.constructor.POWER;
 
@@ -37,7 +50,10 @@ class Dishwasher extends Observable {
             "mm",
             (mm) => {
                 let time = Clock.global;
-                if (time.hh == startTime.hh + this.constructor.WASHING_DURATION && time.mm == startTime.mm) {
+                if (
+                    time.hh == startTime.hh + this.constructor.WASHING_DURATION &&
+                    time.mm == startTime.mm
+                ) {
                     let dishwasher = this;
                     this.log(`${dishwasher.constructor.name} ended washing.`);
                     dishwasher.status = "idle";
@@ -52,20 +68,19 @@ class Dishwasher extends Observable {
 
     loadDishes() {
         if (this.load == "full") {
-            this.log(`${this.constructor.name} is full, cannot load more dishes.`);
+            this.error("is full, cannot load more dishes.");
             return;
         }
         if (this.load == "empty") {
             this.load = "half";
-            this.log(`${this.constructor.name} is half full.`);
+            this.log("is now half full.");
             return;
         }
         this.load = "full";
-        this.log(`${this.constructor.name} is full.`);
+        this.log("is now full.");
         return;
     }
 }
-
 
 class StartDishwasherGoal extends Goal {}
 class StartDishwasherIntention extends Intention {
