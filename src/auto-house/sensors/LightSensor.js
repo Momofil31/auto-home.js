@@ -1,6 +1,6 @@
 const Goal = require("../../bdi/Goal");
 const Intention = require("../../bdi/Intention");
-const Light = require("./Light");
+const Light = require("../devices/Light");
 
 
 
