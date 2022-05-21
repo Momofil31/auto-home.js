@@ -6,6 +6,7 @@ class SecurityAlarmIntention extends Intention {
     static applicable(goal) {
         return goal instanceof SecurityAlarmGoal;
     }
+
     *exec() {
         let people = this.goal.parameters.people;
         let house = this.goal.parameters.house;
@@ -23,7 +24,7 @@ class SecurityAlarmIntention extends Intention {
                             if (suspectId == housePerson.uuid) break;
                         }
                         // if I arrive here we have a burglar
-                        console.log("!!! BURGLAR ALARM !!! Police called.");
+                        this.log("!!! BURGLAR ALARM !!! Police called.");
                     }
                 }
             });

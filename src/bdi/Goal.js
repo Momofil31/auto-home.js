@@ -22,7 +22,7 @@ class Goal {
     }
 
     toString() {
-        return this.constructor.name + "#" + this.id + this.parameters.toString(); //+ this.effect.map(e=>'('+e+')').join('')
+        return this.constructor.name + "#" + this.id; //+ this.effect.map(e=>'('+e+')').join('')
     }
 
     // get precondition () {

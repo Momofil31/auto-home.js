@@ -21,7 +21,8 @@ class Clock {
             (time.hh < 10 ? "0" : "") +
             time.hh +
             ":" +
-            (time.mm == 0 ? "00" : time.mm)
+            (time.mm < 10 ? "0" : "") +
+            time.mm
         );
     }
 
@@ -54,7 +55,7 @@ class Clock {
             // Here, time is logged immediately before any other observable gets updated!
             process.stdout.clearLine(0);
             process.stdout.cursorTo(0);
-            process.stdout.write(Clock.format() + "\t");
+            process.stdout.write(Clock.format());
         }
     }
 }

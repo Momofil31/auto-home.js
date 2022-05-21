@@ -18,7 +18,8 @@ class Agent {
     }
 
     log(...args) {
-        console.log(this.name + "\t\t", ...args);
+        process.stdout.cursorTo(0);
+        console.log("\t\t" + this.name + "\t\t", ...args);
     }
 
     async postSubGoal(subGoal) {

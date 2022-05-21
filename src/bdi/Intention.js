@@ -19,7 +19,8 @@ class Intention {
     }
 
     log (...args) {
-        console.log( this.agent.name+">"+this.constructor.name+"#"+this.id + "\t", ...args); //this.goal.constructor.name+'['+this.goal.id+']'+'>'
+        process.stdout.cursorTo(0);
+        console.log("\t\t" + this.agent.name+">"+this.constructor.name+"#"+this.id + "\t", ...args); //this.goal.constructor.name+'['+this.goal.id+']'+'>'
     }
 
 

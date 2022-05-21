@@ -63,7 +63,7 @@ securityAgent.postSubGoal(
     }),
 );
 
-let burglar = new Person(house, "burglar", house.rooms.out.name);
+let burglar = new Person(house, "Burglar", house.rooms.out.name);
 securityAgent.postSubGoal(
     new SecurityAlarmGoal({ people: { ...house.people, burglar }, house: house }),
 );

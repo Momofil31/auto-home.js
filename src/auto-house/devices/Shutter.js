@@ -10,21 +10,27 @@ class Shutter extends Observable {
         this.name = name; // non-observable
         this.set("status", "down"); // observable
     }
+    log(...args) {
+        process.stdout.cursorTo(0);
+        process.stdout.write("\t\t" + this.name);
+        process.stdout.cursorTo(0);
+        console.log("\t\t\t\t\t", ...args);
+    }
     moveUp() {
         if (this.status != "up") {
             this.status = "up";
-            console.log(`${this.name} shutter moved up.`);
+            this.log(`${this.constructor.name} moved up.`);
             return;
         }
-        console.log(`${this.name} shutter is already up.`);
+        this.log(`${this.constructor.name} is already up.`);
     }
     moveDown() {
         if (this.status != "down") {
             this.status = "down";
-            console.log(`${this.name} shutter moved down.`);
+            this.log(`${this.constructor.name} moved down.`);
             return;
         }
-        console.log(`${this.name} shutter is already down.`);
+        this.log(`${this.constructor.name} is already down.`);
     }
 }
 
