@@ -5,6 +5,7 @@ const { Shutter } = require("./devices/Shutter");
 const CoffeMachine = require("./devices/CoffeMachine");
 const GarageDoor = require("./devices/GarageDoor");
 const { Dishwasher } = require("./devices/Dishwasher");
+const { Fridge } = require("./devices/Fridge");
 
 class House {
     constructor() {
@@ -37,6 +38,7 @@ class House {
             },
             coffee_machine: new CoffeMachine(this, "coffee_machine"),
             dishwasher: new Dishwasher(this, "dishwasher"),
+            fridge: new Fridge(this, "fridge"),
             garage_door: new GarageDoor(this, "garage"),
         };
         this.utilities = {

@@ -16,6 +16,7 @@ const {
 const { ManageShuttersGoal, ManageShuttersIntention } = require("./devices/Shutter");
 const { StartDishwasherGoal, StartDishwasherIntention } = require("./devices/Dishwasher");
 const { SecurityAlarmIntention, SecurityAlarmGoal } = require("./Security");
+const { notifyFoodShortageGoal, notifyFoodShortageIntention } = require("./devices/Fridge");
 
 // House, which includes rooms and devices
 let house = new House();
@@ -29,6 +30,7 @@ houseAgent.intentions.push(SensePeoplePositionIntention);
 houseAgent.intentions.push(LightsFollowPeopleIntention);
 houseAgent.intentions.push(LightsFollowShuttersIntention);
 houseAgent.intentions.push(StartDishwasherIntention);
+houseAgent.intentions.push(notifyFoodShortageIntention);
 
 // add goals
 houseAgent.postSubGoal(new SetupAlarm({ hh: 6, mm: 15 }));
@@ -48,6 +50,7 @@ houseAgent.postSubGoal(
     }),
 );
 houseAgent.postSubGoal(new StartDishwasherGoal({ dishwasher: house.devices.dishwasher }));
+houseAgent.postSubGoal(new notifyFoodShortageGoal({ fridge: house.devices.fridge }));
 
 let securityAgent = new Agent("security agent");
 // add intentions
@@ -78,6 +81,7 @@ Clock.global.observe("mm", () => {
     if (time.hh == 8 && time.mm == 0) house.people.bob.moveTo("out");
     if (time.hh == 12 && time.mm == 0) burglar.moveTo("living_room");
     if (time.hh == 12 && time.mm == 5) burglar.moveTo("out");
+    if (time.hh == 17 && time.mm == 45) house.people.bob.doShopping("out");
     if (time.hh == 18 && time.mm == 0) house.people.bob.moveTo("living_room");
     if (time.hh == 18 && time.mm == 10) house.people.bob.moveTo("hallway");
     if (time.hh == 18 && time.mm == 10) house.people.bob.moveTo("bathroom_0");
