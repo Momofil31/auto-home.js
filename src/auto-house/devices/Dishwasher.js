@@ -5,6 +5,7 @@ const Clock = require("../../utils/Clock");
 const Goal = require("../../bdi/Goal");
 class Dishwasher extends Observable {
     static POWER = 2000; // Watts
+    static WASHING_DURATION = 2; // hours
     constructor(house, name) {
         super();
         this.house = house;
@@ -22,15 +23,25 @@ class Dishwasher extends Observable {
             console.log(`${this.name} ${this.constructor.name} is already washing`);
             return false;
         }
-        // this agent is not a real agent but only to exploit intentions
-        // to stop the washing after 2 hours
-        let dishwasherCycle = new Agent("dishwasher cycle");
-        dishwasherCycle.intentions.push(DishwashingIntention);
-        dishwasherCycle.postSubGoal(
-            new DishwasherGoal({ dishwasher: this, hh: Clock.global.hh, mm: Clock.global.mm }),
-        );
+        let startTime = { hh: Clock.global.hh, mm: Clock.global.mm };
         this.status = "washing";
-        this.house.utilities.electricity.consumption += this.POWER;
+        this.house.utilities.electricity.consumption += this.constructor.POWER;
+
+        Clock.global.observe(
+            "mm",
+            (mm) => {
+                let time = Clock.global;
+                if (time.hh == startTime.hh + this.constructor.WASHING_DURATION && time.mm == startTime.mm) {
+                    let dishwasher = this;
+                    console.log(`\t\t ${dishwasher.name} ended washing.`);
+                    dishwasher.status = "idle";
+                    dishwasher.load = "empty"; // assuming dishes are automatically put away
+                    dishwasher.house.utilities.electricity.consumption -= this.constructor.POWER;
+                    Clock.global.unobserve("mm", mm, "washingcycle_timer");
+                }
+            },
+            "washingcycle_timer",
+        );
     }
 
     loadDishes() {
@@ -46,28 +57,6 @@ class Dishwasher extends Observable {
         this.load = "full";
         console.log(`${this.name} ${this.constructor.name} is full.`);
         return;
-    }
-}
-class DishwasherGoal extends Goal {}
-class DishwashingIntention extends Intention {
-    static applicable(goal) {
-        return goal instanceof DishwasherGoal;
-    }
-    *exec() {
-        while (true) {
-            yield Clock.global.notifyChange("mm", "dishwashingCycle");
-            if (
-                Clock.global.hh == this.goal.parameters.hh + 2 &&
-                Clock.global.mm == this.goal.parameters.mm
-            ) {
-                let dishwasher = this.goal.parameters.dishwasher;
-                this.log(`${dishwasher.name} ended washing.`);
-                dishwasher.status = "idle";
-                dishwasher.load = "empty"; // assuming dishes are automatically put away
-                dishwasher.house.utilities.electricity.consumption -= dishwasher.POWER;
-                break;
-            }
-        }
     }
 }
 
