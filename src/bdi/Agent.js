@@ -1,5 +1,23 @@
 const Beliefset = require("./Beliefset");
 const Intention = require("./Intention");
+const chalk = require("chalk");
+
+var nextId = 0;
+const colors = [
+    "red",
+    "blue",
+    "green",
+    "yellow",
+    "magenta",
+    "cyan",
+    "redBright",
+    "greenBright",
+    "yellowBright",
+    "blueBright",
+    "magentaBright",
+    "cyanBright",
+    "whiteBright",
+];
 
 /**
  * @class Agent
@@ -7,19 +25,37 @@ const Intention = require("./Intention");
 class Agent {
     constructor(name) {
         this.name = name;
+        this.id = nextId++;
 
         /** @type {Beliefset} beliefs */
         this.beliefs = new Beliefset();
 
-        this.beliefs.observeAny((v, fact) => this.log("Beliefset: " + (v ? fact : "not " + fact)));
+        this.beliefs.observeAny((v, fact) =>
+            this.log("Belief changed: " + (v ? fact : "not " + fact)),
+        );
 
         /** @type {Array<Intention>} intentions */
         this.intentions = [];
     }
 
-    log(...args) {
+    headerError(header = "", ...args) {
+        process.stderr.cursorTo(0);
+        header = "\t\t" + header + " ".repeat(Math.max(50 - header.length, 0));
+        console.error(chalk.bold.italic[colors[this.id % colors.length]](header, ...args));
+    }
+
+    error(...args) {
+        this.headerError(this.name, ...args);
+    }
+
+    headerLog(header = "", ...args) {
         process.stdout.cursorTo(0);
-        console.log("\t\t" + this.name + "\t\t", ...args);
+        header = "\t\t" + header + " ".repeat(Math.max(50 - header.length, 0));
+        console.log(chalk[colors[this.id % colors.length]](header, ...args));
+    }
+
+    log(...args) {
+        this.headerLog(this.name, ...args);
     }
 
     async postSubGoal(subGoal) {
@@ -45,7 +81,14 @@ class Agent {
             var intention = new intentionClass(this, subGoal);
 
             var success = await intention.run().catch((err) => {
-                this.log("Error in run() intention:", err);
+                this.error(
+                    "Failed to use intention",
+                    intentionClass.name,
+                    "to achieve goal",
+                    subGoal.toString() + ":",
+                    err.message || err || "undefined error",
+                );
+                //this.error( err.stack || err || 'undefined error');
             });
 
             if (success) {
@@ -57,12 +100,6 @@ class Agent {
                 );
                 return Promise.resolve(true); // same as: return true;
             } else {
-                this.log(
-                    "Failed to use intention",
-                    intentionClass.name,
-                    "to achieve goal",
-                    subGoal.toString(),
-                );
                 continue; // retrying
             }
         }

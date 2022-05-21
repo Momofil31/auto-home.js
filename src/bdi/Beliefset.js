@@ -54,7 +54,7 @@ class Beliefset extends Observable {
      * @return {Array<String>}    Return an Array of String literals (possibly negated facts) e.g. 'light_on kitchen_light' or 'not light_on kitchen_light'
      */
     get literals() {
-        return this.entries.map(([fact, value]) => (value ? fact : "not " + fact));
+        return this.entries.map(([fact, value]) => (value ? fact : "not (" + fact + ")"));
     }
 
     /**

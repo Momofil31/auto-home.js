@@ -21,7 +21,9 @@ describe("observe fact", () => {
     var b = new Beliefset();
 
     var notified = false;
-    var obs = value => {notified = true;};
+    var obs = (value) => {
+        notified = true;
+    };
     b.observe("on", obs);
 
     test("fact initial value is undefined", () => {
@@ -45,7 +47,9 @@ describe("unobserve fact", () => {
     var b = new Beliefset();
 
     var notified = false;
-    var obs = (fact, value) => {notified = true;};
+    var obs = (fact, value) => {
+        notified = true;
+    };
     b.observe(obs, "on");
     b.unobserve(obs, "on");
 

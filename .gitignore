@@ -3,7 +3,6 @@ src/devices/
 src/houseworld/
 src/lightsworld/
 src/planning/
-src/pddl/
 example_async_interleaving.js
 
 # Dependency directories
