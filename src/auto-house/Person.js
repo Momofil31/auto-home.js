@@ -12,6 +12,7 @@ class Person extends Observable {
         this.uuid = uuidv4();
         this.set("in_room", room); // observable
         this.previous_room = room;
+        this.set("temperatureFeeling", 0); // 0 -> ok, 1 -> feel hot, -1 -> feel cold
         // this.observe( 'in_room', v => console.log(this.name, 'moved to', v) )    // observe
     }
     headerLog(header = "", ...args) {
@@ -62,6 +63,18 @@ class Person extends Observable {
             },
             "doShopping",
         );
+    }
+    setCold() {
+        this.temperatureFeeling = -1;
+        this.log("is now cold.");
+    }
+    setHot() {
+        this.temperatureFeeling = 1;
+        this.log("is now cold.");
+    }
+    setOkTemperature() {
+        this.temperatureFeeling = 0;
+        this.log("is now nor hot nor cold.");
     }
 }
 
