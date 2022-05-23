@@ -1,39 +1,16 @@
 const Goal = require("../../bdi/Goal");
 const Intention = require("../../bdi/Intention");
 const Clock = require("../../utils/Clock");
-const Observable = require("../../utils/Observable");
-const chalk = require("chalk");
-const { deviceColors: colors } = require("../../utils/chalkColors");
 
-let nextId = 0;
+const GenericDevice = require("./GenericDevice");
 
-class Shutter extends Observable {
+class Shutter extends GenericDevice {
     constructor(house, name) {
         super();
         this.house = house; // reference to the house
         this.name = name; // non-observable
         this.id = global.deviceNextId++;
         this.set("status", "down"); // observable
-    }
-
-    headerError(header = "", ...args) {
-        process.stderr.cursorTo(0);
-        header = "\t\t" + header + " ".repeat(Math.max(50 - header.length, 0));
-        console.error(chalk.bold.italic[colors[this.id % colors.length]](header, ...args));
-    }
-
-    error(...args) {
-        this.headerError(this.name + " " + this.constructor.name, ...args);
-    }
-
-    headerLog(header = "", ...args) {
-        process.stdout.cursorTo(0);
-        header = "\t\t" + header + " ".repeat(Math.max(50 - header.length, 0));
-        console.log(chalk[colors[this.id % colors.length]](header, ...args));
-    }
-
-    log(...args) {
-        this.headerLog(this.name + " " + this.constructor.name, ...args);
     }
     moveUp() {
         if (this.status != "up") {

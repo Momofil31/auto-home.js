@@ -1,33 +1,14 @@
 const Goal = require("../../bdi/Goal");
 const Intention = require("../../bdi/Intention");
-const Observable = require("../../utils/Observable");
-const chalk = require("chalk");
-const { deviceColors: colors } = require("../../utils/chalkColors");
+const GenericDevice = require("./GenericDevice");
 
-let nextId = 0;
-class Fridge extends Observable {
+class Fridge extends GenericDevice {
     constructor(house, name) {
         super();
         this.house = house;
         this.name = name;
         this.id = global.deviceNextId++;
         this.set("status", "full"); // empty, half of full
-    }
-    headerError(header = "", ...args) {
-        process.stderr.cursorTo(0);
-        header = "\t\t" + header + " ".repeat(Math.max(50 - header.length, 0));
-        console.error(chalk.bold.italic[colors[this.id % colors.length]](header, ...args));
-    }
-    error(...args) {
-        this.headerError(this.name + " " + this.constructor.name, ...args);
-    }
-    headerLog(header = "", ...args) {
-        process.stdout.cursorTo(0);
-        header = "\t\t" + header + " ".repeat(Math.max(50 - header.length, 0));
-        console.log(chalk[colors[this.id % colors.length]](header, ...args));
-    }
-    log(...args) {
-        this.headerLog(this.name + " " + this.constructor.name, ...args);
     }
     takeFood() {
         if (this.status == "empty") {
