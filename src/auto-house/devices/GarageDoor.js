@@ -5,23 +5,24 @@ class GarageDoor extends SimpleOnOffDevice {
         super();
         this.house = house; // reference to the house
         this.name = name; // non-observable
-        this.set("status", "open"); // observable
+        this.id = global.deviceNextId++;
+        this.set("status", "closed"); // observable
     }
     open() {
         if (this.status != "open") {
             this.status = "open";
-            console.log(`${this.name} opened.`);
+            this.log("opened.");
             return;
         }
-        console.error(`${this.name} shutter is already open.`);
+        this.error("is already open.");
     }
     close() {
         if (this.status != "closed") {
             this.status = "closed";
-            console.log(`${this.name} shutter closed.`);
+            this.log("closed.");
             return;
         }
-        console.error(`${this.name} shutter is already closed.`);
+        this.error("is already closed.");
     }
 }
 

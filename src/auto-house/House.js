@@ -8,6 +8,7 @@ const { Dishwasher } = require("./devices/Dishwasher");
 const { Fridge } = require("./devices/Fridge");
 const Temperature = require("./helpers/Temperature");
 const { Thermostat } = require("./devices/Thermostat");
+const { Car } = require("./devices/Car");
 
 class House {
     constructor() {
@@ -18,7 +19,11 @@ class House {
                 doors_to: ["kitchen", "hallway", "out"],
                 temperature: new Temperature(),
             },
-            garage: { name: "garage", doors_to: ["hallway"], temperature: new Temperature() },
+            garage: {
+                name: "garage",
+                doors_to: ["hallway", "out"],
+                temperature: new Temperature(),
+            },
             bathroom_0: {
                 name: "bathroom_0",
                 doors_to: ["hallway"],
@@ -29,7 +34,11 @@ class House {
                 doors_to: ["bathroom_0", "living_room", "garage"],
                 temperature: new Temperature(),
             },
-            out: { name: "out", doors_to: ["living_room"], temperature: new Temperature() },
+            out: {
+                name: "out",
+                doors_to: ["living_room", "garage"],
+                temperature: new Temperature(),
+            },
         };
         this.people = {
             bob: new Person(this, "Bob", this.rooms.living_room.name),
@@ -52,6 +61,7 @@ class House {
             fridge: new Fridge(this, "fridge"),
             garage_door: new GarageDoor(this, "garage"),
             thermostat: new Thermostat(this, "thermostat"),
+            car: new Car(this, "car"),
         };
         this.utilities = {
             electricity: new Observable({ consumption: 0 }),

@@ -25,7 +25,7 @@ class Person extends Observable {
         this.headerLog(this.name, ...args);
     }
 
-    moveTo(to) {
+    async moveTo(to, useCar = false) {
         if (this.in_room == to) {
             this.log(`stays in ${this.in_room}`);
             return false;
@@ -33,6 +33,11 @@ class Person extends Observable {
         if (!this.house.rooms[this.in_room].doors_to.includes(to)) {
             this.log(`failed moving from ${this.in_room} to ${to}`);
             return false;
+        }
+        if (this.in_room == "garage" && to == "out" && useCar) {
+            this.house.devices.car.drive(this);
+        } else if (this.in_room == "out" && to == "garage" && this.house.devices.car.driver == this) {
+            await this.house.devices.car.park();
         }
         // for object: to in this.house.rooms[this.in_room].doors_to
         this.log(`moved from ${this.in_room} to ${to}`);

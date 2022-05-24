@@ -18,6 +18,7 @@ const { StartDishwasherGoal, StartDishwasherIntention } = require("./devices/Dis
 const { SecurityAlarmIntention, SecurityAlarmGoal } = require("./Security");
 const { notifyFoodShortageGoal, notifyFoodShortageIntention } = require("./devices/Fridge");
 const { ManageThermostatIntention, ManageThermostatGoal } = require("./devices/Thermostat");
+const { ManageCarParkingIntention, ManageCarParkingGoal, ChargeCarGoal, ChargeCarIntention } = require("./devices/Car");
 
 global.deviceNextId = 0;
 // House, which includes rooms and devices
@@ -28,16 +29,17 @@ let houseAgent = new Agent("house agent");
 
 // add intentions
 houseAgent.intentions.push(AlarmIntention);
-houseAgent.intentions.push(SensePeoplePositionIntention);
+//houseAgent.intentions.push(SensePeoplePositionIntention);
 houseAgent.intentions.push(LightsFollowPeopleIntention);
 houseAgent.intentions.push(LightsFollowShuttersIntention);
 houseAgent.intentions.push(StartDishwasherIntention);
 houseAgent.intentions.push(notifyFoodShortageIntention);
 houseAgent.intentions.push(ManageThermostatIntention);
+houseAgent.intentions.push(ChargeCarIntention);
 
 // add goals
 houseAgent.postSubGoal(new SetupAlarm({ hh: 6, mm: 15 }));
-houseAgent.postSubGoal(new SensePeoplePositionGoal(house.people));
+//houseAgent.postSubGoal(new SensePeoplePositionGoal(house.people));
 houseAgent.postSubGoal(
     new LightsFollowPeopleGoal({
         people: house.people,
@@ -57,11 +59,13 @@ houseAgent.postSubGoal(new notifyFoodShortageGoal({ fridge: house.devices.fridge
 houseAgent.postSubGoal(
     new ManageThermostatGoal({ people: house.people, thermostat: house.devices.thermostat }),
 );
+houseAgent.postSubGoal(new ChargeCarGoal({car: house.devices.car}));
 
 let securityAgent = new Agent("security agent");
 // add intentions
 securityAgent.intentions.push(ManageShuttersIntention);
 securityAgent.intentions.push(SecurityAlarmIntention);
+securityAgent.intentions.push(ManageCarParkingIntention);
 
 // add goals
 securityAgent.postSubGoal(
@@ -77,6 +81,14 @@ securityAgent.postSubGoal(
     new SecurityAlarmGoal({ people: { ...house.people, burglar }, house: house }),
 );
 
+securityAgent.postSubGoal(
+    new ManageCarParkingGoal({
+        car: house.devices.car,
+        garage_door: house.devices.garage_door,
+        authorized_people: house.people,
+    }),
+);
+
 // Simulated Daily/Weekly schedule
 Clock.global.observe("mm", () => {
     var time = Clock.global;
@@ -84,11 +96,13 @@ Clock.global.observe("mm", () => {
     if (time.hh == 6 && time.mm == 30) house.people.bob.moveTo("kitchen");
     if (time.hh == 6 && time.mm == 35) house.people.bob.eatBreakfast();
     if (time.hh == 8 && time.mm == 0) house.people.bob.moveTo("living_room");
-    if (time.hh == 8 && time.mm == 0) house.people.bob.moveTo("out");
+    if (time.hh == 8 && time.mm == 0) house.people.bob.moveTo("hallway");
+    if (time.hh == 8 && time.mm == 0) house.people.bob.moveTo("garage");
+    if (time.hh == 8 && time.mm == 0) house.people.bob.moveTo("out", true);
     if (time.hh == 12 && time.mm == 0) burglar.moveTo("living_room");
     if (time.hh == 12 && time.mm == 5) burglar.moveTo("out");
     if (time.hh == 17 && time.mm == 45) house.people.bob.doShopping("out");
-    if (time.hh == 18 && time.mm == 0) house.people.bob.moveTo("living_room");
+    if (time.hh == 18 && time.mm == 0) house.people.bob.moveTo("garage");
     if (time.hh == 18 && time.mm == 10) house.people.bob.moveTo("hallway");
     if (time.hh == 18 && time.mm == 10) house.people.bob.moveTo("bathroom_0");
     if (time.hh == 18 && time.mm == 30) house.people.bob.moveTo("hallway");
