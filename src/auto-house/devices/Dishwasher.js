@@ -36,7 +36,7 @@ class Dishwasher extends GenericDevice {
             (mm) => {
                 let time = Clock.global;
                 if (
-                    time.hh == startTime.hh + this.constructor.WASHING_DURATION &&
+                    time.hh == (startTime.hh + this.constructor.WASHING_DURATION) % 24 &&
                     time.mm == startTime.mm
                 ) {
                     let dishwasher = this;
