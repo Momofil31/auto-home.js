@@ -71,9 +71,13 @@ class Observable {
      * @return {Array}    Return an array of [key, value] to iterate over
      */
     get entries() {
-        return Object.entries(this.#values).map(([key, { value, observers }]) => [key, value]);
+        return Object.entries(this.#values);
     }
 
+    /**
+     *
+     * @param {observer} observer function(value, key, observable)
+     */
     observeAny(observer) {
         this.genericObservers.push(observer);
     }
@@ -122,6 +126,19 @@ class Observable {
                 res(value);
             };
             this.observe(key, tmpObs, observerKey);
+        });
+    }
+
+    /**
+     *
+     * @returns {Promise} Promise that resolves when any among the observed values changes
+     */
+    async notifyAnyChange() {
+        return new Promise((res) => {
+            var tmpObs = (value, key, observer) => {
+                res(value);
+            };
+            this.observeAny(tmpObs);
         });
     }
 }

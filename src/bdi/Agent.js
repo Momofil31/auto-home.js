@@ -83,6 +83,7 @@ class Agent {
                     "to achieve goal",
                     subGoal.toString(),
                 );
+                subGoal.achieved = true;
                 return Promise.resolve(true); // same as: return true;
             } else {
                 continue; // retrying
