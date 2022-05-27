@@ -13,26 +13,40 @@ const { Car } = require("./devices/Car");
 class House {
     constructor() {
         this.rooms = {
-            kitchen: { name: "kitchen", doors_to: ["living_room"], temperature: new Temperature() },
+            kitchen: {
+                name: "kitchen",
+                doors_to: ["living_room"],
+                temperature: new Temperature(),
+                cleanStatus: new Observable({ status: "dirty" }),
+                suck_time: 10,
+            },
             living_room: {
                 name: "living_room",
                 doors_to: ["kitchen", "hallway", "out"],
                 temperature: new Temperature(),
+                cleanStatus: new Observable({ status: "clean" }),
+                suck_time: 10,
             },
             garage: {
                 name: "garage",
                 doors_to: ["hallway", "out"],
                 temperature: new Temperature(),
+                cleanStatus: new Observable({ status: "dirty" }),
+                suck_time: 10,
             },
             bathroom_0: {
                 name: "bathroom_0",
                 doors_to: ["hallway"],
                 temperature: new Temperature(),
+                cleanStatus: new Observable({ status: "clean" }),
+                suck_time: 10,
             },
             hallway: {
                 name: "hallway",
                 doors_to: ["bathroom_0", "living_room", "garage"],
                 temperature: new Temperature(),
+                cleanStatus: new Observable({ status: "dirty" }),
+                suck_time: 5,
             },
             out: {
                 name: "out",
