@@ -27,6 +27,7 @@ class Clock {
     }
 
     static #start = true;
+    static TIME_STEP = 5;
 
     static async stopTimer() {
         Clock.#start = false;
@@ -40,7 +41,7 @@ class Clock {
 
             var { dd, hh, mm } = Clock.global;
 
-            if (mm < 60 - 15) Clock.global.mm += 5;
+            if (mm < 60 - 15) Clock.global.mm += Clock.TIME_STEP;
             else {
                 if (hh < 23) {
                     Clock.global.hh += 1; // increased hh but mm still 45
