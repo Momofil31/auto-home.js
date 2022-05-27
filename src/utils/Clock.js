@@ -41,7 +41,7 @@ class Clock {
 
             var { dd, hh, mm } = Clock.global;
 
-            if (mm < 60 - 15) Clock.global.mm += Clock.TIME_STEP;
+            if (mm < 60 - Clock.TIME_STEP) Clock.global.mm += Clock.TIME_STEP;
             else {
                 if (hh < 23) {
                     Clock.global.hh += 1; // increased hh but mm still 45
