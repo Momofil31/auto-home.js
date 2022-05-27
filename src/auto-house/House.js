@@ -9,15 +9,19 @@ const { Fridge } = require("./devices/Fridge");
 const Temperature = require("./helpers/Temperature");
 const { Thermostat } = require("./devices/Thermostat");
 const { Car } = require("./devices/Car");
+const chalk = require("chalk");
+const { deviceColors: colors } = require("../utils/chalkColors");
 
 class House {
     constructor() {
+        this.name = "house";
+        this.id = global.deviceNextId++;
         this.rooms = {
             kitchen: {
                 name: "kitchen",
                 doors_to: ["living_room"],
                 temperature: new Temperature(),
-                cleanStatus: new Observable({ status: "dirty" }),
+                cleanStatus: new Observable({ status: "clean" }),
                 suck_time: 10,
             },
             living_room: {
@@ -31,7 +35,7 @@ class House {
                 name: "garage",
                 doors_to: ["hallway", "out"],
                 temperature: new Temperature(),
-                cleanStatus: new Observable({ status: "dirty" }),
+                cleanStatus: new Observable({ status: "clean" }),
                 suck_time: 10,
             },
             bathroom_0: {
@@ -45,7 +49,7 @@ class House {
                 name: "hallway",
                 doors_to: ["bathroom_0", "living_room", "garage"],
                 temperature: new Temperature(),
-                cleanStatus: new Observable({ status: "dirty" }),
+                cleanStatus: new Observable({ status: "clean" }),
                 suck_time: 5,
             },
             out: {
@@ -80,6 +84,30 @@ class House {
         this.utilities = {
             electricity: new Observable({ consumption: 0 }),
         };
+    }
+    headerLog(header = "", ...args) {
+        process.stdout.cursorTo(0);
+        header = "\t\t" + header + " ".repeat(Math.max(50 - header.length, 0));
+        console.log(chalk[colors[this.id % colors.length]](header, ...args));
+    }
+    log(...args) {
+        this.headerLog(this.name + " " + this.constructor.name, ...args);
+    }
+    headerError(header = "", ...args) {
+        process.stderr.cursorTo(0);
+        header = "\t\t" + header + " ".repeat(Math.max(50 - header.length, 0));
+        console.error(chalk.bold.italic[colors[this.id % colors.length]](header, ...args));
+    }
+    error(...args) {
+        this.headerError(this.name + " " + this.constructor.name, ...args);
+    }
+    setRandomRoomsDirty() {
+        for (let r of Object.values(this.rooms)) {
+            if (r.name != "out" && r.cleanStatus.status == "clean" && Math.random() > 0.5) {
+                r.cleanStatus.status = "dirty";
+            }
+        }
+        this.log("set random rooms dirty");
     }
 }
 
