@@ -1,18 +1,11 @@
 // Device which actually do things in the house
-
-// Agent which gives intelligence (PDDL) on the device and controls it
-
-const Agent = require("../../bdi/Agent");
 const Goal = require("../../bdi/Goal");
 const Intention = require("../../bdi/Intention");
 const GenericDevice = require("./GenericDevice");
 const pddlActionIntention = require("../../pddl/actions/pddlActionIntention");
-const PlanningGoal = require("../../pddl/PlanningGoal");
-const House = require("../House");
 const Clock = require("../../utils/Clock");
-
-global.deviceNextId = 0;
-
+const { SendRoomStateGoal } = require("../agents/HouseAgent");
+const { MessageDispatcher } = require("../helpers/Communication");
 class VacuumCleaner extends GenericDevice {
     constructor(house, name, chargingStationRoom) {
         super();
@@ -84,23 +77,19 @@ class VacuumCleaner extends GenericDevice {
         Clock.global.observe(
             "mm",
             (mm) => {
-                if (timeRemaining > 0) {
-                    timeRemaining = timeRemaining - Clock.TIME_STEP;
-                    this.battery += Clock.TIME_STEP;
+                timeRemaining = timeRemaining - Clock.TIME_STEP;
+                this.battery += Clock.TIME_STEP;
+                if (timeRemaining == 0) {
+                    this.log("charging completed");
+                    this.charging = false;
+                    Clock.global.unobserve("mm", "waitForCharging");
                     return;
                 }
-                this.log("charging completed");
-                Clock.global.unobserve("mm", "waitForCharging");
-                this.charging = false;
             },
             "waitForCharging",
         );
     }
 }
-// Agents
-// let house = new House();
-
-// let vacuumCleanerDevice = new VacuumCleaner(house, "vacuum", "kitchen");
 
 class LearnHouseGoal extends Goal {}
 class LearnHouseIntention extends Intention {
@@ -162,7 +151,12 @@ class Move extends pddlActionIntention {
 }
 class Suck extends pddlActionIntention {
     static parameters = ["r"];
-    static precondition = [["in", "r"], ["dirty", "r"], ["not zero_battery"]];
+    static precondition = [
+        ["not person_in_room", "r"],
+        ["in", "r"],
+        ["dirty", "r"],
+        ["not zero_battery"],
+    ];
     static effect = [
         ["not dirty", "r"],
         ["clean", "r"], // to change in order to have clearner bot
@@ -208,75 +202,29 @@ class Charge extends pddlActionIntention {
     }
 }
 
-class VacuumCleanerAgent extends Agent {
-    constructor(name, vacuumCleanerDevice) {
-        super(name);
-        this.vacuumCleanerDevice = vacuumCleanerDevice;
+class AskRoomStatusGoal extends Goal {}
+class AskRoomStatusIntention extends Intention {
+    static applicable(goal) {
+        return goal instanceof AskRoomStatusGoal;
+    }
+    *exec() {
+        let agent = this.goal.parameters.agent;
+        let house = this.goal.parameters.house;
+        let request = yield new SendRoomStateGoal({
+            house: house,
+            recipientAgent: this.agent,
+        });
+        yield MessageDispatcher.authenticate(this.agent).sendTo(agent.name, request);
     }
 }
 
-// let vacuumCleanerAgent = new VacuumCleanerAgent("vacuum_cleaner", vacuumCleanerDevice);
-// vacuumCleanerAgent.intentions.push(LearnHouseIntention);
-
-// const learnHouseGoal = new LearnHouseGoal({
-//     house: house,
-//     start: vacuumCleanerDevice.in_room,
-// });
-
-// const cleanHouseGoal = new PlanningGoal({
-//     goal: [
-//         "clean kitchen",
-//         "clean living_room",
-//         "clean hallway",
-//         "clean bathroom_0",
-//         "clean garage",
-//     ],
-// });
-
-// const chargeGoal = new PlanningGoal({
-//     goal: ["in " + vacuumCleanerDevice.chargingStationRoom, "full_battery"],
-// });
-
-// vacuumCleanerAgent.postSubGoal(learnHouseGoal);
-
-// let { OnlinePlanning } = require("../../pddl/OnlinePlanner")([Move, Suck, Charge]);
-// vacuumCleanerAgent.intentions.push(OnlinePlanning);
-// vacuumCleanerAgent.beliefs.declare("in kitchen");
-// vacuumCleanerAgent.beliefs.declare("dirty kitchen");
-// vacuumCleanerAgent.beliefs.declare("dirty hallway");
-// vacuumCleanerAgent.beliefs.declare("dirty garage");
-// vacuumCleanerAgent.beliefs.declare("clean living_room");
-// vacuumCleanerAgent.beliefs.declare("clean bathroom_0");
-// vacuumCleanerAgent.beliefs.declare("full_battery");
-// vacuumCleanerAgent.beliefs.undeclare("zero_battery");
-
-// const postCleaningGoal = (agent) => (achieved) => {
-//     if (achieved) {
-//         agent.postSubGoal(cleanHouseGoal);
-//         learnHouseGoal.unobserve("achieved", achieved, "learnHouseGoal");
-//     }
-// };
-// const postChargeGoal = (agent) => (achieved) => {
-//     if (achieved) {
-//         agent.postSubGoal(chargeGoal);
-//         cleanHouseGoal.unobserve("achieved", achieved, "chargeGoal");
-//     }
-// };
-
-// learnHouseGoal.observe("achieved", postCleaningGoal(vacuumCleanerAgent), "learnHouseGoal");
-// cleanHouseGoal.observe("achieved", postChargeGoal(vacuumCleanerAgent), "postChargeGoal");
-
-// console.log("a1 entries", vacuumCleanerAgent.beliefs.entries);
-// console.log("a1 literals", vacuumCleanerAgent.beliefs.literals);
-
-// Clock.startTimer();
-
 module.exports = {
     VacuumCleaner,
-    VacuumCleanerAgent,
     LearnHouseGoal,
     LearnHouseIntention,
     Move,
     Suck,
     Charge,
+    AskRoomStatusGoal,
+    AskRoomStatusIntention,
 };
