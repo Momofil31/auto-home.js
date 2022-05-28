@@ -13,6 +13,7 @@ const chalk = require("chalk");
 const { deviceColors: colors } = require("../utils/chalkColors");
 
 class House {
+    static DIRTINESS = 0.5; // between 0 and 1
     constructor() {
         this.name = "house";
         this.id = global.deviceNextId++;
@@ -103,12 +104,13 @@ class House {
     }
     setRandomRoomsDirty() {
         for (let r of Object.values(this.rooms)) {
-            if (r.name != "out" && r.cleanStatus.status == "clean" && Math.random() > 0.5) {
-                r.cleanStatus.status = "dirty";
+            if (r.name != "out") {
+                r.cleanStatus.status =
+                    Math.random() > this.constructor.DIRTINESS ? "dirty" : "clean";
             }
         }
         this.log("set random rooms dirty");
     }
 }
 
-module.exports = House;
+module.exports = { House };
