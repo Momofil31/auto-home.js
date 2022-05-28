@@ -47,7 +47,6 @@ class VacuumCleaner extends GenericDevice {
         if (this.charging) {
             return false;
         }
-        this.house.rooms[r].cleanStatus.status = "clean";
         this.log("suck", r);
         // TODO wait finishing sucking. Each suck should depend on in_room each room has different time encoded in house.
         let timeRemaining = this.house.rooms[r].suck_time;
@@ -56,12 +55,9 @@ class VacuumCleaner extends GenericDevice {
             if (timeRemaining > 0) {
                 timeRemaining = timeRemaining - Clock.TIME_STEP;
                 this.battery -= Clock.TIME_STEP;
-            } else {
-                Clock.global.unobserve("mm", "waitForSucking");
             }
         }
-
-        this.battery -= Clock.TIME_STEP;
+        this.house.rooms[r].cleanStatus.status = "clean";
         return true;
     }
     charge() {
