@@ -2,7 +2,7 @@
 const GenericDevice = require("./GenericDevice");
 const Clock = require("../../utils/Clock");
 
-class VacuumCleaner extends GenericDevice {
+class MopBot extends GenericDevice {
     constructor(house, name, chargingStationRoom, initialLocation) {
         super();
         this.house = house;
@@ -33,11 +33,11 @@ class VacuumCleaner extends GenericDevice {
         this.log("move", from, to);
         return true;
     }
-    async suck(r) {
+    async clean(r) {
         if (this.in_room != r) {
             return false;
         }
-        if (this.house.rooms[r].cleanStatus.status != "dirty") {
+        if (this.house.rooms[r].cleanStatus.status != "sucked") {
             return false;
         }
         if (this.charging) {
@@ -49,17 +49,18 @@ class VacuumCleaner extends GenericDevice {
                 return false;
             }
         }
-        this.log("suck", r);
-        // TODO wait finishing sucking. Each suck should depend on in_room each room has different time encoded in house.
-        let timeRemaining = this.house.rooms[r].suck_time;
+
+        this.log("cleaning", r);
+
+        let timeRemaining = this.house.rooms[r].clean_time;
         while (timeRemaining) {
-            await Clock.global.notifyChange("mm", "waitForSucking");
+            await Clock.global.notifyChange("mm", "waitForCleaning");
             if (timeRemaining > 0) {
                 timeRemaining = timeRemaining - Clock.TIME_STEP;
                 this.battery -= Clock.TIME_STEP;
             }
         }
-        this.house.rooms[r].cleanStatus.status = "sucked";
+        this.house.rooms[r].cleanStatus.status = "clean";
         return true;
     }
     charge() {
@@ -89,4 +90,4 @@ class VacuumCleaner extends GenericDevice {
     }
 }
 
-module.exports = { VacuumCleaner };
+module.exports = { MopBot };

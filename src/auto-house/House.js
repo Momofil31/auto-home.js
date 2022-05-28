@@ -24,6 +24,7 @@ class House {
                 temperature: new Temperature(),
                 cleanStatus: new Observable({ status: "clean" }),
                 suck_time: 10,
+                clean_time: 10,
             },
             living_room: {
                 name: "living_room",
@@ -31,6 +32,7 @@ class House {
                 temperature: new Temperature(),
                 cleanStatus: new Observable({ status: "clean" }),
                 suck_time: 10,
+                clean_time: 10,
             },
             garage: {
                 name: "garage",
@@ -38,6 +40,7 @@ class House {
                 temperature: new Temperature(),
                 cleanStatus: new Observable({ status: "clean" }),
                 suck_time: 10,
+                clean_time: 10,
             },
             bathroom_0: {
                 name: "bathroom_0",
@@ -45,6 +48,7 @@ class House {
                 temperature: new Temperature(),
                 cleanStatus: new Observable({ status: "clean" }),
                 suck_time: 10,
+                clean_time: 10,
             },
             hallway: {
                 name: "hallway",
@@ -52,6 +56,7 @@ class House {
                 temperature: new Temperature(),
                 cleanStatus: new Observable({ status: "clean" }),
                 suck_time: 5,
+                clean_time: 5,
             },
             out: {
                 name: "out",

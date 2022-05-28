@@ -1,10 +1,13 @@
 const Agent = require("../../bdi/Agent");
 
 class VacuumCleanerAgent extends Agent {
-    constructor(name, vacuumCleanerDevice) {
+    constructor(name, vacuumCleanerDevice, mopBotAgent) {
         super(name);
-        this.vacuumCleanerDevice = vacuumCleanerDevice;
+        this.device = vacuumCleanerDevice;
+        this.mopBotAgent = mopBotAgent;
     }
 }
 
-module.exports = { VacuumCleanerAgent };
+module.exports = {
+    VacuumCleanerAgent,
+};
