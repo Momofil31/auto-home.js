@@ -1,0 +1,50 @@
+                house_agent                                        Trying to use intention LightsFollowPeopleIntention to achieve goal LightsFollowPeopleGoal#0
+                house_agent>LightsFollowPeopleIntention#0          Intention started
+                house_agent                                        Trying to use intention LightsFollowShuttersIntention to achieve goal LightsFollowShuttersGoal#1
+                house_agent>LightsFollowShuttersIntention#1        Intention started
+                security_agent                                     Trying to use intention ManageShuttersIntention to achieve goal ManageShuttersGoal#2
+                security_agent>ManageShuttersIntention#2           Intention started
+                security_agent                                     Trying to use intention SecurityAlarmIntention to achieve goal SecurityAlarmGoal#3
+                security_agent>SecurityAlarmIntention#3            Intention started
+                living_room Light                                  switched on.
+                living_room Light                                  switched off.
+0:07:00         kitchen Shutter                                    moved up.
+                living_room Shutter                                moved up.
+                bathroom_0 Shutter                                 moved up.
+                stairs Shutter                                     moved up.
+                bathroom_1 Shutter                                 moved up.
+                master_bedroom Shutter                             moved up.
+                bedroom_0 Shutter                                  moved up.
+                bedroom_1 Shutter                                  moved up.
+0:08:00         Bob                                                moved from living_room to out
+                kitchen Shutter                                    moved down.
+                living_room Shutter                                moved down.
+                bathroom_0 Shutter                                 moved down.
+                stairs Shutter                                     moved down.
+                bathroom_1 Shutter                                 moved down.
+                master_bedroom Shutter                             moved down.
+                bedroom_0 Shutter                                  moved down.
+                bedroom_1 Shutter                                  moved down.
+0:12:00         Burglar                                            moved from out to living_room
+                security_agent>SecurityAlarmIntention#3            !!! BURGLAR ALARM !!! Police called.
+0:12:05         Burglar                                            moved from living_room to out
+0:18:00         Bob                                                moved from out to living_room
+                living_room Light                                  switched on.
+                kitchen Shutter                                    moved up.
+                living_room Shutter                                moved up.
+                bathroom_0 Shutter                                 moved up.
+                stairs Shutter                                     moved up.
+                bathroom_1 Shutter                                 moved up.
+                master_bedroom Shutter                             moved up.
+                bedroom_0 Shutter                                  moved up.
+                bedroom_1 Shutter                                  moved up.
+                security_agent>SecurityAlarmIntention#3            !!! BURGLAR ALARM !!! Police called.
+                living_room Light                                  switched off.
+0:22:00         kitchen Shutter                                    moved down.
+                living_room Shutter                                moved down.
+                bathroom_0 Shutter                                 moved down.
+                stairs Shutter                                     moved down.
+                bathroom_1 Shutter                                 moved down.
+                master_bedroom Shutter                             moved down.
+                bedroom_0 Shutter                                  moved down.
+                bedroom_1 Shutter                                  moved down.
