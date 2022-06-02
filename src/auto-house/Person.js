@@ -24,7 +24,14 @@ class Person extends Observable {
     log(...args) {
         this.headerLog(this.name, ...args);
     }
-
+    headerError(header = "", ...args) {
+        process.stderr.cursorTo(0);
+        header = "\t\t" + header + " ".repeat(Math.max(50 - header.length, 0));
+        console.error(chalk.bold.italic[colors[this.id % colors.length]](header, ...args));
+    }
+    error(...args) {
+        this.headerError(this.name + " " + this.constructor.name, ...args);
+    }
     async moveTo(to, useCar = false) {
         if (this.in_room == to) {
             this.log(`stays in ${this.in_room}`);
@@ -35,8 +42,12 @@ class Person extends Observable {
             return false;
         }
         if (this.in_room == "garage" && to == "out" && useCar) {
-            this.house.devices.car.drive(this);
-        } else if (this.in_room == "out" && to == "garage" && this.house.devices.car.driver == this) {
+            await this.house.devices.car.drive(this);
+        } else if (
+            this.in_room == "out" &&
+            to == "garage" &&
+            this.house.devices.car.driver == this
+        ) {
             await this.house.devices.car.park();
         }
         // for object: to in this.house.rooms[this.in_room].doors_to
