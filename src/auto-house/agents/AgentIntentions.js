@@ -104,13 +104,23 @@ class VacuumCleaningProcedureIntention extends Intention {
         let chargeGoal = new ChargeGoal(this.agent.device);
         for (let i = 0; i < times; i++) {
             let goalAchieved = yield this.agent.postSubGoal(askRoomStatusGoal);
+            if (i > 0) {
+                this.log("New try, ignoring rooms with people inside");
+                suckHouseGoal = new SuckHouseGoal(this.agent.device.house, true);
+            }
             if (goalAchieved) goalAchieved = yield this.agent.postSubGoal(suckHouseGoal);
+
             if (goalAchieved) {
-                yield this.agent.postSubGoal(askToCleanGoal);
+                let chargePromise = new Promise(async (res) => {
+                    await this.agent.postSubGoal(chargeGoal);
+                });
+                let askToCleanPromise = new Promise(async (res) => {
+                    await this.agent.postSubGoal(askToCleanGoal);
+                });
+                Promise.all([chargePromise, askToCleanPromise]);
                 break;
             }
         }
-        yield this.agent.postSubGoal(chargeGoal);
     }
 }
 
@@ -188,10 +198,19 @@ class MopCleaningProcedureIntention extends Intention {
         let chargeGoal = new ChargeGoal(this.agent.device);
         for (let i = 0; i < times; i++) {
             let goalAchieved = yield this.agent.postSubGoal(askHouseConfigurationGoal);
+            if (i > 0) {
+                this.log("New try, ignoring rooms with people inside");
+                cleanHouseGoal = new CleanHouseGoal(this.agent.device.house, true);
+            }
             if (goalAchieved) goalAchieved = yield this.agent.postSubGoal(cleanHouseGoal);
-            if (goalAchieved) break;
+            if (goalAchieved) {
+                let chargePromise = new Promise(async (res) => {
+                    await this.agent.postSubGoal(chargeGoal);
+                });
+                Promise.all([chargePromise]);
+                break;
+            }
         }
-        yield this.agent.postSubGoal(chargeGoal);
     }
 }
 
