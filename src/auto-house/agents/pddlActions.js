@@ -56,15 +56,24 @@ class Charge extends pddlActionIntention {
     ];
     static effect = [["full_battery"], ["not zero_battery"]];
 
-    async *exec() {
+    *exec() {
         if (this.checkPrecondition()) {
             yield this.agent.device.charge();
-            await this.agent.device.notifyChange("charging", "waitForCharging");
-            // This breaks a bit the rules but I couldn't find another way.
-            if (!this.agent.device.charging && this.agent.device.battery == 100) {
-                this.applyEffect();
-            } else {
-                throw new Error("charge failed");
+            let i = 0;
+            while (i < 2) {
+                // allow only two changes in charging variable before throwing error
+                yield this.agent.device.notifyChange("charging", "waitForCharging");
+                // This breaks a bit the rules but I couldn't find another way.
+                if (
+                    !this.agent.device.charging &&
+                    this.agent.device.battery == this.agent.device.constructor.BATTERY_AUTONOMY
+                ) {
+                    this.applyEffect();
+                    break;
+                } else if (i > 0) {
+                    throw new Error("charge failed");
+                }
+                i++;
             }
         } else throw new Error("pddl precondition not valid");
     }

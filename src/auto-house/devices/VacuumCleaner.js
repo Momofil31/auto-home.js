@@ -3,13 +3,14 @@ const GenericDevice = require("./GenericDevice");
 const Clock = require("../../utils/Clock");
 
 class VacuumCleaner extends GenericDevice {
+    static BATTERY_AUTONOMY = 200; // MINUTES
     constructor(house, name, chargingStationRoom, initialLocation) {
         super();
         this.house = house;
         this.name = name;
         this.id = global.deviceNextId++;
         this.set("in_room", initialLocation);
-        this.set("battery", 100);
+        this.set("battery", this.constructor.BATTERY_AUTONOMY);
         this.set("charging", false);
         this.chargingStationRoom = chargingStationRoom;
     }
@@ -57,6 +58,10 @@ class VacuumCleaner extends GenericDevice {
             if (timeRemaining > 0) {
                 timeRemaining = timeRemaining - Clock.TIME_STEP;
                 this.battery -= Clock.TIME_STEP;
+                if (this.battery <= 0) {
+                    this.log("action failed: no battery");
+                    this.battery = 0;
+                }
             }
         }
         this.house.rooms[r].cleanStatus.status = "sucked";
@@ -66,12 +71,12 @@ class VacuumCleaner extends GenericDevice {
         if (this.in_room != this.chargingStationRoom) {
             return false;
         }
-        if (this.battery == 100) {
+        if (this.battery == this.constructor.BATTERY_AUTONOMY) {
             return false;
         }
         this.charging = true;
         this.log("charging");
-        let timeRemaining = 100 - this.battery;
+        let timeRemaining = this.constructor.BATTERY_AUTONOMY - this.battery;
         Clock.global.observe(
             "mm",
             (mm) => {
@@ -79,13 +84,14 @@ class VacuumCleaner extends GenericDevice {
                 this.battery += Clock.TIME_STEP;
                 if (timeRemaining == 0) {
                     this.log("charging completed");
-                    this.charging = false;
                     Clock.global.unobserve("mm", "waitForCharging");
-                    return;
+                    this.charging = false;
+                    return true;
                 }
             },
             "waitForCharging",
         );
+        return true;
     }
 }
 
