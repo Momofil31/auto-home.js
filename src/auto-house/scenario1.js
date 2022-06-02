@@ -1,5 +1,6 @@
-const House = require("./House");
+const { House } = require("./House");
 const Agent = require("../bdi/Agent");
+const { HouseAgent } = require("./agents/HouseAgent");
 const Clock = require("../utils/Clock");
 const Person = require("./Person");
 const { AlarmIntention, SetupAlarm } = require("./devices/Alarm.js");
@@ -9,23 +10,24 @@ const {
     LightsFollowShuttersGoal,
     LightsFollowShuttersIntention,
 } = require("./devices/Light");
-const {
-    SensePeoplePositionIntention,
-    SensePeoplePositionGoal,
-} = require("./sensors/PeoplePositionSensor");
 const { ManageShuttersGoal, ManageShuttersIntention } = require("./devices/Shutter");
 const { StartDishwasherGoal, StartDishwasherIntention } = require("./devices/Dishwasher");
 const { SecurityAlarmIntention, SecurityAlarmGoal } = require("./Security");
 const { notifyFoodShortageGoal, notifyFoodShortageIntention } = require("./devices/Fridge");
 const { ManageThermostatIntention, ManageThermostatGoal } = require("./devices/Thermostat");
-const { ManageCarParkingIntention, ManageCarParkingGoal, ChargeCarGoal, ChargeCarIntention } = require("./devices/Car");
+const {
+    ManageCarParkingIntention,
+    ManageCarParkingGoal,
+    ChargeCarGoal,
+    ChargeCarIntention,
+} = require("./devices/Car");
 
 global.deviceNextId = 0;
 // House, which includes rooms and devices
 let house = new House();
 
 // Agents
-let houseAgent = new Agent("house agent");
+let houseAgent = new HouseAgent("house_agent");
 
 // add intentions
 houseAgent.intentions.push(AlarmIntention);
@@ -38,7 +40,7 @@ houseAgent.intentions.push(ManageThermostatIntention);
 houseAgent.intentions.push(ChargeCarIntention);
 
 // add goals
-houseAgent.postSubGoal(new SetupAlarm({ hh: 6, mm: 15 }));
+houseAgent.postSubGoal(new SetupAlarm({ hh: 6, mm: 15, person: house.people.bob }));
 //houseAgent.postSubGoal(new SensePeoplePositionGoal(house.people));
 houseAgent.postSubGoal(
     new LightsFollowPeopleGoal({
@@ -59,9 +61,9 @@ houseAgent.postSubGoal(new notifyFoodShortageGoal({ fridge: house.devices.fridge
 houseAgent.postSubGoal(
     new ManageThermostatGoal({ people: house.people, thermostat: house.devices.thermostat }),
 );
-houseAgent.postSubGoal(new ChargeCarGoal({car: house.devices.car}));
+houseAgent.postSubGoal(new ChargeCarGoal({ car: house.devices.car }));
 
-let securityAgent = new Agent("security agent");
+let securityAgent = new Agent("security_agent");
 // add intentions
 securityAgent.intentions.push(ManageShuttersIntention);
 securityAgent.intentions.push(SecurityAlarmIntention);
@@ -110,6 +112,7 @@ Clock.global.observe("mm", () => {
     if (time.hh == 18 && time.mm == 45) house.people.bob.moveTo("hallway");
     if (time.hh == 19 && time.mm == 0) house.people.bob.moveTo("living_room");
     if (time.hh == 19 && time.mm == 5) house.people.bob.setCold();
+    if (time.hh == 19 && time.mm == 20) house.people.bob.setHot();
     if (time.hh == 20 && time.mm == 0) house.people.bob.moveTo("kitchen");
     if (time.hh == 21 && time.mm == 0) house.people.bob.moveTo("living_room");
 });

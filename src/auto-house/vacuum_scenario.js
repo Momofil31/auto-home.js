@@ -34,6 +34,7 @@ let { OnlinePlanning: MopBotPlanning } = require("../pddl/OnlinePlanner")([Move,
 global.deviceNextId = 0;
 
 let house = new House();
+delete house.people.alice;
 
 // HOUSE AGENT
 let houseAgent = new HouseAgent("house_agent", house);
@@ -80,7 +81,6 @@ const learnHouseGoal = new LearnHouseGoal({
 });
 
 vacuumCleanerAgent.postSubGoal(learnHouseGoal);
-
 // Simulated Daily/Weekly schedule
 Clock.global.observe("mm", async () => {
     var time = Clock.global;
