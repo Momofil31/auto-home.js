@@ -1,0 +1,100 @@
+                house_agent                                        Trying to use intention LightsFollowPeopleIntention to achieve goal LightsFollowPeopleGoal#0
+                house_agent>LightsFollowPeopleIntention#0          Intention started
+                house_agent                                        Trying to use intention LightsFollowShuttersIntention to achieve goal LightsFollowShuttersGoal#1
+                house_agent>LightsFollowShuttersIntention#1        Intention started
+                security_agent                                     Trying to use intention ManageShuttersIntention to achieve goal ManageShuttersGoal#2
+                security_agent>ManageShuttersIntention#2           Intention started
+                master_bedroom Light                               switched on.
+0:06:30         Bob                                                moved from master_bedroom to hallway_upstairs
+                Bob                                                moved from hallway_upstairs to stairs
+                Bob                                                moved from stairs to hallway
+                Bob                                                moved from hallway to living_room
+                Bob                                                moved from living_room to kitchen
+                kitchen Light                                      switched on.
+0:07:00         kitchen Shutter                                    moved up.
+                living_room Shutter                                moved up.
+                bathroom_0 Shutter                                 moved up.
+                stairs Shutter                                     moved up.
+                bathroom_1 Shutter                                 moved up.
+                master_bedroom Shutter                             moved up.
+                bedroom_0 Shutter                                  moved up.
+                bedroom_1 Shutter                                  moved up.
+                kitchen Light                                      switched off.
+                master_bedroom Light                               switched off.
+0:08:00         Bob                                                moved from kitchen to living_room
+                Bob                                                moved from living_room to hallway
+                Bob                                                moved from hallway to garage
+                Bob                                                moved from garage to out
+                kitchen Shutter                                    moved down.
+                living_room Shutter                                moved down.
+                bathroom_0 Shutter                                 moved down.
+                stairs Shutter                                     moved down.
+                bathroom_1 Shutter                                 moved down.
+                master_bedroom Shutter                             moved down.
+                bedroom_0 Shutter                                  moved down.
+                bedroom_1 Shutter                                  moved down.
+0:18:00         Bob                                                moved from out to garage
+                garage Light                                       switched on.
+                kitchen Shutter                                    moved up.
+                living_room Shutter                                moved up.
+                bathroom_0 Shutter                                 moved up.
+                stairs Shutter                                     moved up.
+                bathroom_1 Shutter                                 moved up.
+                master_bedroom Shutter                             moved up.
+                bedroom_0 Shutter                                  moved up.
+                bedroom_1 Shutter                                  moved up.
+                garage Light                                       switched off.
+0:18:10         Bob                                                moved from garage to hallway
+                Bob                                                moved from hallway to bathroom_0
+0:18:30         Bob                                                moved from bathroom_0 to hallway
+                hallway Light                                      switched on.
+0:18:35         Bob                                                moved from hallway to garage
+                garage Light                                       switched on.
+                hallway Light                                      switched off.
+0:18:45         Bob                                                moved from garage to hallway
+                hallway Light                                      switched on.
+                garage Light                                       switched off.
+0:19:00         Bob                                                moved from hallway to living_room
+                living_room Light                                  switched on.
+                hallway Light                                      switched off.
+0:20:00         Bob                                                moved from living_room to kitchen
+                kitchen Light                                      switched on.
+                living_room Light                                  switched off.
+0:21:00         Bob                                                moved from kitchen to living_room
+                living_room Light                                  switched on.
+                kitchen Light                                      switched off.
+0:22:00         Bob                                                stays in living_room
+                Bob                                                moved from living_room to hallway
+                Bob                                                moved from hallway to stairs
+                Bob                                                moved from stairs to hallway_upstairs
+                Bob                                                failed moving from hallway_upstairs to bathroom
+                kitchen Shutter                                    moved down.
+                living_room Shutter                                moved down.
+                bathroom_0 Shutter                                 moved down.
+                stairs Shutter                                     moved down.
+                bathroom_1 Shutter                                 moved down.
+                master_bedroom Shutter                             moved down.
+                bedroom_0 Shutter                                  moved down.
+                bedroom_1 Shutter                                  moved down.
+                hallway_upstairs Light                             switched on.
+0:22:30         Bob                                                stays in hallway_upstairs
+                Bob                                                moved from hallway_upstairs to master_bedroom
+                master_bedroom Light                               switched on.
+                hallway_upstairs Light                             switched off.
+1:06:30         Bob                                                moved from master_bedroom to hallway_upstairs
+                Bob                                                moved from hallway_upstairs to stairs
+                Bob                                                moved from stairs to hallway
+                Bob                                                moved from hallway to living_room
+                Bob                                                moved from living_room to kitchen
+                kitchen Light                                      switched on.
+                living_room Light                                  switched off.
+1:07:00         kitchen Shutter                                    moved up.
+                living_room Shutter                                moved up.
+                bathroom_0 Shutter                                 moved up.
+                stairs Shutter                                     moved up.
+                bathroom_1 Shutter                                 moved up.
+                master_bedroom Shutter                             moved up.
+                bedroom_0 Shutter                                  moved up.
+                bedroom_1 Shutter                                  moved up.
+                kitchen Light                                      switched off.
+                master_bedroom Light                               switched off. 

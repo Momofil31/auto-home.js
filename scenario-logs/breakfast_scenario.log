@@ -1,0 +1,106 @@
+                house_agent                                        Trying to use intention AlarmIntention to achieve goal SetupAlarm#0
+                house_agent>AlarmIntention#0                       Intention started
+                house_agent                                        Trying to use intention AlarmIntention to achieve goal SetupAlarm#1
+                house_agent>AlarmIntention#1                       Intention started
+                house_agent                                        Trying to use intention LightsFollowPeopleIntention to achieve goal LightsFollowPeopleGoal#2
+                house_agent>LightsFollowPeopleIntention#2          Intention started
+                house_agent                                        Trying to use intention LightsFollowShuttersIntention to achieve goal LightsFollowShuttersGoal#3
+                house_agent>LightsFollowShuttersIntention#3        Intention started
+                house_agent                                        Trying to use intention StartDishwasherIntention to achieve goal StartDishwasherGoal#4
+                house_agent>StartDishwasherIntention#4             Intention started
+                house_agent                                        Trying to use intention notifyFoodShortageIntention to achieve goal notifyFoodShortageGoal#5
+                house_agent>notifyFoodShortageIntention#5          Intention started
+                house_agent                                        Trying to use intention MakeCoffeeIntention to achieve goal MakeCoffeeGoal#6
+                house_agent>MakeCoffeeIntention#6                  Intention started
+                security_agent                                     Trying to use intention ManageShuttersIntention to achieve goal ManageShuttersGoal#7
+                security_agent>ManageShuttersIntention#7           Intention started
+                master_bedroom Light                               switched on.
+                bedroom_0 Light                                    switched on.
+0:06:55         house_agent>AlarmIntention#0                       ALARM for Bob, it's 06:55
+0:07:00         Bob                                                moved from master_bedroom to hallway_upstairs
+                Bob                                                moved from hallway_upstairs to stairs
+                Bob                                                moved from stairs to hallway
+                Bob                                                moved from hallway to living_room
+                Bob                                                moved from living_room to kitchen
+                fridge Fridge                                      is now half full.
+                dishwasher Dishwasher                              is now half full.
+                Bob                                                has eaten breakfast.
+                kitchen Shutter                                    moved up.
+                living_room Shutter                                moved up.
+                bathroom_0 Shutter                                 moved up.
+                stairs Shutter                                     moved up.
+                bathroom_1 Shutter                                 moved up.
+                master_bedroom Shutter                             moved up.
+                bedroom_0 Shutter                                  moved up.
+                bedroom_1 Shutter                                  moved up.
+                kitchen Light                                      switched on.
+                house_agent>MakeCoffeeIntention#6                  Bob wants to have coffee
+                coffee_machine CoffeeMachine                       Coffee is ready!
+                kitchen Light                                      switched off.
+                master_bedroom Light                               switched off.
+                bedroom_0 Light                                    switched off.
+                house_agent>notifyFoodShortageIntention#5          SMARTPHONE NOTIFICATION: fridge is now half full. Please, do the shopping.
+0:07:55         house_agent>AlarmIntention#1                       ALARM for Alice, it's 07:55
+0:08:00         Alice                                              moved from bedroom_0 to hallway_upstairs
+                Alice                                              moved from hallway_upstairs to stairs
+                Alice                                              moved from stairs to hallway
+                Alice                                              moved from hallway to living_room
+                Alice                                              moved from living_room to kitchen
+                fridge Fridge                                      is now empty.
+                dishwasher Dishwasher                              is now full.
+                Alice                                              has eaten breakfast.
+                house_agent>MakeCoffeeIntention#6                  Alice wants to have coffee
+                coffee_machine CoffeeMachine                       Coffee is ready!
+                house_agent>notifyFoodShortageIntention#5          SMARTPHONE NOTIFICATION: fridge is now half full. Please, do the shopping.
+                dishwasher Dishwasher                              started washing.
+0:10:00         dishwasher Dishwasher                              Dishwasher ended washing.
+0:22:00         Bob                                                moved from kitchen to living_room
+                Bob                                                moved from living_room to hallway
+                Bob                                                moved from hallway to stairs
+                Bob                                                moved from stairs to hallway_upstairs
+                Bob                                                moved from hallway_upstairs to master_bedroom
+                kitchen Shutter                                    moved down.
+                living_room Shutter                                moved down.
+                bathroom_0 Shutter                                 moved down.
+                stairs Shutter                                     moved down.
+                bathroom_1 Shutter                                 moved down.
+                master_bedroom Shutter                             moved down.
+                bedroom_0 Shutter                                  moved down.
+                bedroom_1 Shutter                                  moved down.
+                master_bedroom Light                               switched on.
+0:22:30         Alice                                              moved from kitchen to living_room
+                Alice                                              moved from living_room to hallway
+                Alice                                              moved from hallway to stairs
+                Alice                                              moved from stairs to hallway_upstairs
+                Alice                                              moved from hallway_upstairs to master_bedroom
+1:06:55         house_agent>AlarmIntention#0                       ALARM for Bob, it's 06:55
+1:07:00         Bob                                                moved from master_bedroom to hallway_upstairs
+                Bob                                                moved from hallway_upstairs to stairs
+                Bob                                                moved from stairs to hallway
+                Bob                                                moved from hallway to living_room
+                Bob                                                moved from living_room to kitchen
+                fridge Fridge                                      is empty, cannot take any food.
+                Bob Person                                         Cannot have breakfast. Taking food from fridge failed.
+                kitchen Shutter                                    moved up.
+                living_room Shutter                                moved up.
+                bathroom_0 Shutter                                 moved up.
+                stairs Shutter                                     moved up.
+                bathroom_1 Shutter                                 moved up.
+                master_bedroom Shutter                             moved up.
+                bedroom_0 Shutter                                  moved up.
+                bedroom_1 Shutter                                  moved up.
+                kitchen Light                                      switched on.
+                house_agent>MakeCoffeeIntention#6                  Bob wants to have coffee
+                coffee_machine CoffeeMachine                       Coffee is ready!
+                kitchen Light                                      switched off.
+                master_bedroom Light                               switched off.
+1:07:55         house_agent>AlarmIntention#1                       ALARM for Alice, it's 07:55
+1:08:00         Alice                                              moved from master_bedroom to hallway_upstairs
+                Alice                                              moved from hallway_upstairs to stairs
+                Alice                                              moved from stairs to hallway
+                Alice                                              moved from hallway to living_room
+                Alice                                              moved from living_room to kitchen
+                fridge Fridge                                      is empty, cannot take any food.
+                Alice Person                                       Cannot have breakfast. Taking food from fridge failed.
+                house_agent>MakeCoffeeIntention#6                  Alice wants to have coffee
+                coffee_machine CoffeeMachine                       Coffee is ready!

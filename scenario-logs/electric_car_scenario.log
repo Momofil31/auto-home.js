@@ -1,0 +1,237 @@
+                house_agent                                        Trying to use intention LightsFollowPeopleIntention to achieve goal LightsFollowPeopleGoal#0
+                house_agent>LightsFollowPeopleIntention#0          Intention started
+                house_agent                                        Trying to use intention LightsFollowShuttersIntention to achieve goal LightsFollowShuttersGoal#1
+                house_agent>LightsFollowShuttersIntention#1        Intention started
+                house_agent                                        Trying to use intention ChargeCarIntention to achieve goal ChargeCarGoal#2
+                house_agent>ChargeCarIntention#2                   Intention started
+                security_agent                                     Trying to use intention ManageShuttersIntention to achieve goal ManageShuttersGoal#3
+                security_agent>ManageShuttersIntention#3           Intention started
+                security_agent                                     Trying to use intention ManageCarParkingIntention to achieve goal ManageCarParkingGoal#4
+                security_agent>ManageCarParkingIntention#4         Intention started
+                living_room Light                                  switched on.
+                living_room Light                                  switched off.
+                garage GarageDoor                                  is already closed.
+0:06:30         Bob                                                moved from living_room to hallway
+                hallway Light                                      switched on.
+0:07:00         kitchen Shutter                                    moved up.
+                living_room Shutter                                moved up.
+                bathroom_0 Shutter                                 moved up.
+                stairs Shutter                                     moved up.
+                bathroom_1 Shutter                                 moved up.
+                master_bedroom Shutter                             moved up.
+                bedroom_0 Shutter                                  moved up.
+                bedroom_1 Shutter                                  moved up.
+                hallway Light                                      switched off.
+0:08:00         Bob                                                moved from hallway to garage
+                car Car                                            Bob is now in the car.
+                Bob                                                moved from garage to out
+                kitchen Shutter                                    moved down.
+                living_room Shutter                                moved down.
+                bathroom_0 Shutter                                 moved down.
+                stairs Shutter                                     moved down.
+                bathroom_1 Shutter                                 moved down.
+                master_bedroom Shutter                             moved down.
+                bedroom_0 Shutter                                  moved down.
+                bedroom_1 Shutter                                  moved down.
+                garage GarageDoor                                  opened.
+                car Car                                            Exit the garage.
+                garage GarageDoor                                  closed.
+0:18:00         garage GarageDoor                                  opened.
+                car Car                                            car parked succesfully
+                car Car                                            Bob is now out of the car.
+                Bob                                                moved from out to garage
+                garage GarageDoor                                  closed.
+                garage Light                                       switched on.
+                kitchen Shutter                                    moved up.
+                living_room Shutter                                moved up.
+                bathroom_0 Shutter                                 moved up.
+                stairs Shutter                                     moved up.
+                bathroom_1 Shutter                                 moved up.
+                master_bedroom Shutter                             moved up.
+                bedroom_0 Shutter                                  moved up.
+                bedroom_1 Shutter                                  moved up.
+                garage Light                                       switched off.
+0:18:10         Bob                                                moved from garage to hallway
+                Bob                                                moved from hallway to living_room
+0:22:00         kitchen Shutter                                    moved down.
+                living_room Shutter                                moved down.
+                bathroom_0 Shutter                                 moved down.
+                stairs Shutter                                     moved down.
+                bathroom_1 Shutter                                 moved down.
+                master_bedroom Shutter                             moved down.
+                bedroom_0 Shutter                                  moved down.
+                bedroom_1 Shutter                                  moved down.
+0:23:00         car Car                                            started slow charging
+1:05:00         car Car                                            ended slow charging.
+1:06:30         Bob                                                moved from living_room to hallway
+                hallway Light                                      switched on.
+1:07:00         kitchen Shutter                                    moved up.
+                living_room Shutter                                moved up.
+                bathroom_0 Shutter                                 moved up.
+                stairs Shutter                                     moved up.
+                bathroom_1 Shutter                                 moved up.
+                master_bedroom Shutter                             moved up.
+                bedroom_0 Shutter                                  moved up.
+                bedroom_1 Shutter                                  moved up.
+                hallway Light                                      switched off.
+1:08:00         Bob                                                moved from hallway to garage
+                car Car                                            Bob is now in the car.
+                Bob                                                moved from garage to out
+                kitchen Shutter                                    moved down.
+                living_room Shutter                                moved down.
+                bathroom_0 Shutter                                 moved down.
+                stairs Shutter                                     moved down.
+                bathroom_1 Shutter                                 moved down.
+                master_bedroom Shutter                             moved down.
+                bedroom_0 Shutter                                  moved down.
+                bedroom_1 Shutter                                  moved down.
+                garage GarageDoor                                  opened.
+                car Car                                            Exit the garage.
+                garage GarageDoor                                  closed.
+1:12:00         garage GarageDoor                                  opened.
+                car Car                                            car parked succesfully
+                car Car                                            Bob is now out of the car.
+                Bob                                                moved from out to garage
+                car Car                                            started fast charging
+                garage GarageDoor                                  closed.
+                garage Light                                       switched on.
+                kitchen Shutter                                    moved up.
+                living_room Shutter                                moved up.
+                bathroom_0 Shutter                                 moved up.
+                stairs Shutter                                     moved up.
+                bathroom_1 Shutter                                 moved up.
+                master_bedroom Shutter                             moved up.
+                bedroom_0 Shutter                                  moved up.
+                bedroom_1 Shutter                                  moved up.
+                garage Light                                       switched off.
+1:12:10         Bob                                                moved from garage to hallway
+                Bob                                                moved from hallway to living_room
+1:13:00         car Car                                            ended fast charging.
+1:22:00         kitchen Shutter                                    moved down.
+                living_room Shutter                                moved down.
+                bathroom_0 Shutter                                 moved down.
+                stairs Shutter                                     moved down.
+                bathroom_1 Shutter                                 moved down.
+                master_bedroom Shutter                             moved down.
+                bedroom_0 Shutter                                  moved down.
+                bedroom_1 Shutter                                  moved down.
+2:00:45^C
+    ~/Documents/0Dev/AutonomousSoftwareAgents/auto-home.js    main !13 ?6                                                                        INT ✘  30s   16:37:12  
+❯ node src/auto-house/electric_car_scenario.js
+                house_agent                                        Trying to use intention LightsFollowPeopleIntention to achieve goal LightsFollowPeopleGoal#0
+                house_agent>LightsFollowPeopleIntention#0          Intention started
+                house_agent                                        Trying to use intention LightsFollowShuttersIntention to achieve goal LightsFollowShuttersGoal#1
+                house_agent>LightsFollowShuttersIntention#1        Intention started
+                house_agent                                        Trying to use intention ChargeCarIntention to achieve goal ChargeCarGoal#2
+                house_agent>ChargeCarIntention#2                   Intention started
+                security_agent                                     Trying to use intention ManageShuttersIntention to achieve goal ManageShuttersGoal#3
+                security_agent>ManageShuttersIntention#3           Intention started
+                security_agent                                     Trying to use intention ManageCarParkingIntention to achieve goal ManageCarParkingGoal#4
+                security_agent>ManageCarParkingIntention#4         Intention started
+                living_room Light                                  switched on.
+                living_room Light                                  switched off.
+                garage GarageDoor                                  is already closed.
+0:06:30         Bob                                                moved from living_room to hallway
+                hallway Light                                      switched on.
+0:07:00         kitchen Shutter                                    moved up.
+                living_room Shutter                                moved up.
+                bathroom_0 Shutter                                 moved up.
+                stairs Shutter                                     moved up.
+                bathroom_1 Shutter                                 moved up.
+                master_bedroom Shutter                             moved up.
+                bedroom_0 Shutter                                  moved up.
+                bedroom_1 Shutter                                  moved up.
+                hallway Light                                      switched off.
+0:08:00         Bob                                                moved from hallway to garage
+                car Car                                            Bob is now in the car.
+                Bob                                                moved from garage to out
+                kitchen Shutter                                    moved down.
+                living_room Shutter                                moved down.
+                bathroom_0 Shutter                                 moved down.
+                stairs Shutter                                     moved down.
+                bathroom_1 Shutter                                 moved down.
+                master_bedroom Shutter                             moved down.
+                bedroom_0 Shutter                                  moved down.
+                bedroom_1 Shutter                                  moved down.
+                garage GarageDoor                                  opened.
+                car Car                                            Exit the garage.
+                garage GarageDoor                                  closed.
+0:18:00         garage GarageDoor                                  opened.
+                car Car                                            car parked succesfully
+                car Car                                            Bob is now out of the car.
+                Bob                                                moved from out to garage
+                garage GarageDoor                                  closed.
+                garage Light                                       switched on.
+                kitchen Shutter                                    moved up.
+                living_room Shutter                                moved up.
+                bathroom_0 Shutter                                 moved up.
+                stairs Shutter                                     moved up.
+                bathroom_1 Shutter                                 moved up.
+                master_bedroom Shutter                             moved up.
+                bedroom_0 Shutter                                  moved up.
+                bedroom_1 Shutter                                  moved up.
+                garage Light                                       switched off.
+0:18:10         Bob                                                moved from garage to hallway
+                Bob                                                moved from hallway to living_room
+0:22:00         kitchen Shutter                                    moved down.
+                living_room Shutter                                moved down.
+                bathroom_0 Shutter                                 moved down.
+                stairs Shutter                                     moved down.
+                bathroom_1 Shutter                                 moved down.
+                master_bedroom Shutter                             moved down.
+                bedroom_0 Shutter                                  moved down.
+                bedroom_1 Shutter                                  moved down.
+0:23:00         car Car                                            started slow charging
+1:05:00         car Car                                            ended slow charging.
+1:06:30         Bob                                                moved from living_room to hallway
+                hallway Light                                      switched on.
+1:07:00         kitchen Shutter                                    moved up.
+                living_room Shutter                                moved up.
+                bathroom_0 Shutter                                 moved up.
+                stairs Shutter                                     moved up.
+                bathroom_1 Shutter                                 moved up.
+                master_bedroom Shutter                             moved up.
+                bedroom_0 Shutter                                  moved up.
+                bedroom_1 Shutter                                  moved up.
+                hallway Light                                      switched off.
+1:08:00         Bob                                                moved from hallway to garage
+                car Car                                            Bob is now in the car.
+                Bob                                                moved from garage to out
+                kitchen Shutter                                    moved down.
+                living_room Shutter                                moved down.
+                bathroom_0 Shutter                                 moved down.
+                stairs Shutter                                     moved down.
+                bathroom_1 Shutter                                 moved down.
+                master_bedroom Shutter                             moved down.
+                bedroom_0 Shutter                                  moved down.
+                bedroom_1 Shutter                                  moved down.
+                garage GarageDoor                                  opened.
+                car Car                                            Exit the garage.
+                garage GarageDoor                                  closed.
+1:12:00         garage GarageDoor                                  opened.
+                car Car                                            car parked succesfully
+                car Car                                            Bob is now out of the car.
+                Bob                                                moved from out to garage
+                car Car                                            started fast charging
+                garage GarageDoor                                  closed.
+                garage Light                                       switched on.
+                kitchen Shutter                                    moved up.
+                living_room Shutter                                moved up.
+                bathroom_0 Shutter                                 moved up.
+                stairs Shutter                                     moved up.
+                bathroom_1 Shutter                                 moved up.
+                master_bedroom Shutter                             moved up.
+                bedroom_0 Shutter                                  moved up.
+                bedroom_1 Shutter                                  moved up.
+                garage Light                                       switched off.
+1:12:10         Bob                                                moved from garage to hallway
+                Bob                                                moved from hallway to living_room
+1:13:00         car Car                                            ended fast charging.
+1:22:00         kitchen Shutter                                    moved down.
+                living_room Shutter                                moved down.
+                bathroom_0 Shutter                                 moved down.
+                stairs Shutter                                     moved down.
+                bathroom_1 Shutter                                 moved down.
+                master_bedroom Shutter                             moved down.
+                bedroom_0 Shutter                                  moved down.
+                bedroom_1 Shutter                                  moved down. 
