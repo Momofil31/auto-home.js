@@ -13,6 +13,7 @@ class Person extends Observable {
         this.set("in_room", room); // observable
         this.previous_room = room;
         this.set("temperatureFeeling", 0); // 0 -> ok, 1 -> feel hot, -1 -> feel cold
+        this.set("wantsToHaveCoffee", false);
         // this.observe( 'in_room', v => console.log(this.name, 'moved to', v) )    // observe
     }
     headerLog(header = "", ...args) {
@@ -61,7 +62,12 @@ class Person extends Observable {
             this.log("cannot have breakfast. Not in the kitchen.");
             return false;
         }
-        this.house.devices.fridge.takeFood();
+        this.wantsToHaveCoffee = true;
+        let res = this.house.devices.fridge.takeFood();
+        if (!res) {
+            this.error("Cannot have breakfast. Taking food from fridge failed.");
+            return false;
+        }
         this.house.devices.dishwasher.loadDishes();
         this.log("has eaten breakfast.");
         return true;
