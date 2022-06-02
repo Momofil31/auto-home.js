@@ -1,26 +1,26 @@
-const { House } = require("./House");
-const Agent = require("../bdi/Agent");
-const { HouseAgent } = require("./agents/HouseAgent");
-const Clock = require("../utils/Clock");
-const Person = require("./Person");
-const { AlarmIntention, SetupAlarm } = require("./devices/Alarm.js");
+const { House } = require("../House");
+const Agent = require("../../bdi/Agent");
+const { HouseAgent } = require("../agents/HouseAgent");
+const Clock = require("../../utils/Clock");
+const Person = require("../Person");
+const { AlarmIntention, SetupAlarm } = require("../devices/Alarm.js");
 const {
     LightsFollowPeopleIntention,
     LightsFollowPeopleGoal,
     LightsFollowShuttersGoal,
     LightsFollowShuttersIntention,
-} = require("./devices/Light");
-const { ManageShuttersGoal, ManageShuttersIntention } = require("./devices/Shutter");
-const { StartDishwasherGoal, StartDishwasherIntention } = require("./devices/Dishwasher");
-const { SecurityAlarmIntention, SecurityAlarmGoal } = require("./Security");
-const { notifyFoodShortageGoal, notifyFoodShortageIntention } = require("./devices/Fridge");
-const { ManageThermostatIntention, ManageThermostatGoal } = require("./devices/Thermostat");
+} = require("../devices/Light");
+const { ManageShuttersGoal, ManageShuttersIntention } = require("../devices/Shutter");
+const { StartDishwasherGoal, StartDishwasherIntention } = require("../devices/Dishwasher");
+const { SecurityAlarmIntention, SecurityAlarmGoal } = require("../Security");
+const { notifyFoodShortageGoal, notifyFoodShortageIntention } = require("../devices/Fridge");
+const { ManageThermostatIntention, ManageThermostatGoal } = require("../devices/Thermostat");
 const {
     ManageCarParkingIntention,
     ManageCarParkingGoal,
     ChargeCarGoal,
     ChargeCarIntention,
-} = require("./devices/Car");
+} = require("../devices/Car");
 
 global.deviceNextId = 0;
 // House, which includes rooms and devices

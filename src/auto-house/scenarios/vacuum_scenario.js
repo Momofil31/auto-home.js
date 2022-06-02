@@ -1,7 +1,7 @@
 // Utility
-const Clock = require("../utils/Clock");
-const { Postman, PostmanAcceptAllRequest } = require("./helpers/Communication");
-const { Move, Charge, Suck, Clean } = require("./agents/pddlActions");
+const Clock = require("../../utils/Clock");
+const { Postman, PostmanAcceptAllRequest } = require("../helpers/Communication");
+const { Move, Charge, Suck, Clean } = require("../agents/pddlActions");
 const {
     MopCleaningProcedureIntention,
     AskHouseConfigurationIntention,
@@ -13,23 +13,23 @@ const {
     VacuumCleaningProcedureGoal,
     VacuumCleaningProcedureIntention,
     SendHouseConfigurationIntention,
-} = require("./agents/AgentIntentions");
+} = require("../agents/AgentIntentions");
 // Devices
-const { House } = require("./House");
-const { VacuumCleaner } = require("./devices/VacuumCleaner");
-const { MopBot } = require("./devices/MopBot");
+const { House } = require("../House");
+const { VacuumCleaner } = require("../devices/VacuumCleaner");
+const { MopBot } = require("../devices/MopBot");
 // Agents
-const { HouseAgent } = require("./agents/HouseAgent");
-const { VacuumCleanerAgent } = require("./agents/VacuumCleanerAgent");
-const { MopBotAgent } = require("./agents/MopBotAgent");
+const { HouseAgent } = require("../agents/HouseAgent");
+const { VacuumCleanerAgent } = require("../agents/VacuumCleanerAgent");
+const { MopBotAgent } = require("../agents/MopBotAgent");
 
 // Plannning
-let { OnlinePlanning: VacuumCleanerPlanning } = require("../pddl/OnlinePlanner")([
+let { OnlinePlanning: VacuumCleanerPlanning } = require("../../pddl/OnlinePlanner")([
     Move,
     Suck,
     Charge,
 ]);
-let { OnlinePlanning: MopBotPlanning } = require("../pddl/OnlinePlanner")([Move, Clean, Charge]);
+let { OnlinePlanning: MopBotPlanning } = require("../../pddl/OnlinePlanner")([Move, Clean, Charge]);
 
 global.deviceNextId = 0;
 
