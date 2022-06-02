@@ -10,15 +10,17 @@ class AlarmIntention extends Intention {
     }
     *exec() {
         while (true) {
-            yield Clock.global.notifyChange("mm", "alarm");
+            yield Clock.global.notifyChange("mm", "alarm" + this.goal.parameters.person.name);
             if (
                 Clock.global.hh == this.goal.parameters.hh &&
                 Clock.global.mm == this.goal.parameters.mm
             ) {
                 this.log(
-                    `ALARM, it's ${this.goal.parameters.hh < 10 ? "0" : ""}${
-                        this.goal.parameters.hh
-                    }:${this.goal.parameters.mm < 10 ? "00" : this.goal.parameters.mm}`,
+                    `ALARM for ${this.goal.parameters.person.name}, it's ${
+                        this.goal.parameters.hh < 10 ? "0" : ""
+                    }${this.goal.parameters.hh}:${
+                        this.goal.parameters.mm < 10 ? "00" : this.goal.parameters.mm
+                    }`,
                 );
             }
         }
