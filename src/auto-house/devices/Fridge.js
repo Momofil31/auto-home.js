@@ -29,11 +29,6 @@ class Fridge extends GenericDevice {
             this.error("is full, cannot load more food.");
             return false;
         }
-        if (this.status == "empty") {
-            this.status = "half";
-            this.log("is now half full.");
-            return true;
-        }
         this.status = "full";
         this.log("is now full.");
         return true;
