@@ -95,7 +95,7 @@ class VacuumCleaningProcedureIntention extends Intention {
     static applicable(goal) {
         return goal instanceof VacuumCleaningProcedureGoal;
     }
-    *exec({ houseAgent, times } = parameters) {
+    *exec({ houseAgent, times }) {
         let askRoomStatusGoal = new AskRoomStatusGoal({
             queriedAgent: houseAgent,
         });
@@ -189,7 +189,7 @@ class MopCleaningProcedureIntention extends Intention {
     static applicable(goal) {
         return goal instanceof MopCleaningProcedureGoal;
     }
-    *exec({ vacuumCleanerAgent, times } = parameters) {
+    *exec({ vacuumCleanerAgent, times }) {
         let askHouseConfigurationGoal = new AskHouseConfigurationGoal({
             queriedAgent: vacuumCleanerAgent,
             house: this.agent.device.house,

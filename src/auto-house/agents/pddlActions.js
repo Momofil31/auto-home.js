@@ -7,7 +7,7 @@ class Move extends pddlActionIntention {
         ["in", "r2"],
         ["not in", "r1"],
     ];
-    *exec({ r1, r2 } = parameters) {
+    *exec({ r1, r2 }) {
         if (this.checkPrecondition()) {
             let res = this.agent.device.move(r1, r2);
             yield res;
@@ -32,7 +32,7 @@ class Suck extends pddlActionIntention {
         ["not dirty", "r"],
         ["sucked", "r"],
     ];
-    *exec({ r } = parameters) {
+    *exec({ r }) {
         if (this.checkPrecondition()) {
             let res = yield this.agent.device.suck(r);
             if (res) {
@@ -92,7 +92,7 @@ class Clean extends pddlActionIntention {
         ["not sucked", "r"],
         ["clean", "r"], // to change in order to have clearner bot
     ];
-    *exec({ r } = parameters) {
+    *exec({ r }) {
         if (this.checkPrecondition()) {
             let res = yield this.agent.device.clean(r);
             if (res) {
