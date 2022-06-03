@@ -42,8 +42,10 @@ function setup(intentions = []) {
                     return res;
                 });
 
-            // console.log(res);
-            // console.log(res.result.plan);
+            if (!res.result.plan && res == "Server busy...") {
+                this.log("Planning API not responding");
+                throw new Error("Planning API not responding");
+            }
 
             if (!res.result.plan && res.result.output.split("\n")[0] != " --- OK.") {
                 this.log("No plan found");
