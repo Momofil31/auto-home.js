@@ -27,6 +27,14 @@ class Thermostat extends GenericDevice {
             this.error(`temperature of room ${room.name} already at ${temperature} degrees.`);
             return;
         }
+        if (temperature > 28) {
+            this.error(`Cannot set temperature this high: ${temperature} degrees.`);
+            return;
+        }
+        if (temperature < 16) {
+            this.error(`Cannot set temperature this low: ${temperature} degrees.`);
+            return;
+        }
         if (room.temperature.degrees < temperature) {
             this.log(
                 `temperature of room ${room.name} increased to ${temperature} degrees. Heating started.`,
