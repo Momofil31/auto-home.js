@@ -1,6 +1,7 @@
 const { House } = require("../House");
 const Agent = require("../../bdi/Agent");
-const { HouseAgent, MakeCoffeeIntention, MakeCoffeeGoal } = require("../agents/HouseAgent");
+const { HouseAgent } = require("../agents/HouseAgent");
+const {MakeCoffeeIntention, MakeCoffeeGoal} = require("../devices/CoffeeMachine");
 const Clock = require("../../utils/Clock");
 const { AlarmIntention, SetupAlarm } = require("../devices/Alarm.js");
 const {

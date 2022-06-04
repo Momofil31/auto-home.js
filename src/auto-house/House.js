@@ -2,7 +2,7 @@ const Observable = require("../utils/Observable");
 const Person = require("./Person");
 const { Light } = require("./devices/Light");
 const { Shutter } = require("./devices/Shutter");
-const CoffeMachine = require("./devices/CoffeMachine");
+const { CoffeeMachine } = require("./devices/CoffeeMachine");
 const GarageDoor = require("./devices/GarageDoor");
 const { Dishwasher } = require("./devices/Dishwasher");
 const { Fridge } = require("./devices/Fridge");
@@ -149,7 +149,7 @@ class House {
                 bedroom_1: new Light(this, "bedroom_1"),
                 utility_room: new Light(this, "utility_room"),
             },
-            coffee_machine: new CoffeMachine(this, "coffee_machine"),
+            coffee_machine: new CoffeeMachine(this, "coffee_machine"),
             dishwasher: new Dishwasher(this, "dishwasher"),
             fridge: new Fridge(this, "fridge"),
             garage_door: new GarageDoor(this, "garage"),
