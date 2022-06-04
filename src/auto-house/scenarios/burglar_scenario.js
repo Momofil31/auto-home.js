@@ -1,5 +1,9 @@
 const { House } = require("../House");
-const Agent = require("../../bdi/Agent");
+const {
+    SecurityAgent,
+    SecurityAlarmGoal,
+    SecurityAlarmIntention,
+} = require("../agents/SecurityAgent");
 const { HouseAgent } = require("../agents/HouseAgent");
 const Clock = require("../../utils/Clock");
 const Person = require("../Person");
@@ -10,7 +14,6 @@ const {
     LightsFollowShuttersIntention,
 } = require("../devices/Light");
 const { ManageShuttersGoal, ManageShuttersIntention } = require("../devices/Shutter");
-const { SecurityAlarmIntention, SecurityAlarmGoal } = require("../Security");
 
 global.deviceNextId = 0;
 // House, which includes rooms and devices
@@ -42,7 +45,7 @@ houseAgent.postSubGoal(
     }),
 );
 
-let securityAgent = new Agent("security_agent");
+let securityAgent = new SecurityAgent("security_agent");
 // add intentions
 securityAgent.intentions.push(ManageShuttersIntention);
 securityAgent.intentions.push(SecurityAlarmIntention);

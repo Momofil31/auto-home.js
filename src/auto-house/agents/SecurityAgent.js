@@ -1,5 +1,13 @@
-const Goal = require("../bdi/Goal");
-const Intention = require("../bdi/Intention");
+const Agent = require("../../bdi/Agent");
+const Goal = require("../../bdi/Goal");
+const Intention = require("../../bdi/Intention");
+
+class SecurityAgent extends Agent {
+    constructor(name, house) {
+        super(name);
+        this.house = house;
+    }
+}
 
 class SecurityAlarmGoal extends Goal {}
 class SecurityAlarmIntention extends Intention {
@@ -34,4 +42,4 @@ class SecurityAlarmIntention extends Intention {
     }
 }
 
-module.exports = { SecurityAlarmGoal, SecurityAlarmIntention };
+module.exports = { SecurityAgent, SecurityAlarmGoal, SecurityAlarmIntention };

@@ -1,6 +1,6 @@
 const { House } = require("../House");
-const Agent = require("../../bdi/Agent");
 const { HouseAgent } = require("../agents/HouseAgent");
+const { SecurityAgent } = require("../agents/SecurityAgent");
 const Clock = require("../../utils/Clock");
 const {
     LightsFollowPeopleIntention,
@@ -37,7 +37,7 @@ houseAgent.postSubGoal(
     }),
 );
 
-let securityAgent = new Agent("security_agent");
+let securityAgent = new SecurityAgent("security_agent");
 // add intentions
 securityAgent.intentions.push(ManageShuttersIntention);
 

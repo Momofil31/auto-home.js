@@ -1,7 +1,7 @@
 const { House } = require("../House");
-const Agent = require("../../bdi/Agent");
+const { SecurityAgent } = require("../agents/SecurityAgent");
 const { HouseAgent } = require("../agents/HouseAgent");
-const {MakeCoffeeIntention, MakeCoffeeGoal} = require("../devices/CoffeeMachine");
+const { MakeCoffeeIntention, MakeCoffeeGoal } = require("../devices/CoffeeMachine");
 const Clock = require("../../utils/Clock");
 const { AlarmIntention, SetupAlarm } = require("../devices/Alarm.js");
 const {
@@ -56,7 +56,7 @@ houseAgent.postSubGoal(
     new MakeCoffeeGoal({ people: house.people, coffee_machine: house.devices.coffee_machine }),
 );
 
-let securityAgent = new Agent("security_agent");
+let securityAgent = new SecurityAgent("security_agent");
 securityAgent.intentions.push(ManageShuttersIntention);
 
 securityAgent.postSubGoal(

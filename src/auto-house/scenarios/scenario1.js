@@ -1,5 +1,9 @@
 const { House } = require("../House");
-const Agent = require("../../bdi/Agent");
+const {
+    SecurityAgent,
+    SecurityAlarmGoal,
+    SecurityAlarmIntention,
+} = require("../agents/SecurityAgent");
 const { HouseAgent } = require("../agents/HouseAgent");
 const Clock = require("../../utils/Clock");
 const Person = require("../Person");
@@ -12,7 +16,6 @@ const {
 } = require("../devices/Light");
 const { ManageShuttersGoal, ManageShuttersIntention } = require("../devices/Shutter");
 const { StartDishwasherGoal, StartDishwasherIntention } = require("../devices/Dishwasher");
-const { SecurityAlarmIntention, SecurityAlarmGoal } = require("../Security");
 const { notifyFoodShortageGoal, notifyFoodShortageIntention } = require("../devices/Fridge");
 const { ManageThermostatIntention, ManageThermostatGoal } = require("../devices/Thermostat");
 const {
@@ -63,7 +66,7 @@ houseAgent.postSubGoal(
 );
 houseAgent.postSubGoal(new ChargeCarGoal({ car: house.devices.car }));
 
-let securityAgent = new Agent("security_agent");
+let securityAgent = new SecurityAgent("security_agent");
 // add intentions
 securityAgent.intentions.push(ManageShuttersIntention);
 securityAgent.intentions.push(SecurityAlarmIntention);
