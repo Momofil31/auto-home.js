@@ -14,6 +14,7 @@ const { ManageShuttersGoal, ManageShuttersIntention } = require("../devices/Shut
 const { StartDishwasherGoal, StartDishwasherIntention } = require("../devices/Dishwasher");
 const { SecurityAlarmIntention, SecurityAlarmGoal } = require("../Security");
 const { notifyFoodShortageGoal, notifyFoodShortageIntention } = require("../devices/Fridge");
+const { MakeCoffeeIntention, MakeCoffeeGoal } = require("../devices/CoffeeMachine");
 const { ManageThermostatIntention, ManageThermostatGoal } = require("../devices/Thermostat");
 const {
     ManageCarParkingIntention,
@@ -65,6 +66,7 @@ houseAgent.intentions.push(LightsFollowPeopleIntention);
 houseAgent.intentions.push(LightsFollowShuttersIntention);
 houseAgent.intentions.push(StartDishwasherIntention);
 houseAgent.intentions.push(notifyFoodShortageIntention);
+houseAgent.intentions.push(MakeCoffeeIntention);
 houseAgent.intentions.push(ManageThermostatIntention);
 houseAgent.intentions.push(ChargeCarIntention);
 houseAgent.intentions.push(PostmanAcceptAllRequest);
@@ -91,6 +93,9 @@ houseAgent.postSubGoal(
 );
 houseAgent.postSubGoal(new StartDishwasherGoal({ dishwasher: house.devices.dishwasher }));
 houseAgent.postSubGoal(new notifyFoodShortageGoal({ fridge: house.devices.fridge }));
+houseAgent.postSubGoal(
+    new MakeCoffeeGoal({ people: house.people, coffee_machine: house.devices.coffee_machine }),
+);
 houseAgent.postSubGoal(
     new ManageThermostatGoal({ people: house.people, thermostat: house.devices.thermostat }),
 );
