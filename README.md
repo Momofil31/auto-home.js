@@ -15,14 +15,14 @@ First `npm install` to install the required dependencies.
 From root directory of this repository run:
 
 ```
-node ./src/autohouse/scenarios/complete_scenario.js
+node ./src/auto-house/scenarios/complete_scenario.js
 ```
 
 ---
 
 ## Logs
 
-Logs of the scenario running can be found in `scenario_logs` directory.
+Logs of the scenario running can be found in `scenario-logs` directory.
 
 ---
 
